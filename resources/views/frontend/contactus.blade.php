@@ -79,8 +79,11 @@
     </div>
 
     <footer class="py-3 mt-auto" style="background-color: #b49164;">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p>
+        <div class="container py-3">
+            <hr class="bg-light">
+            <div class="text-center small">
+                © 2025 by BlogPost. Powered and secured by <span class="text-white">SSE Web Solution</span>
+            </div>
         </div>
     </footer>
 

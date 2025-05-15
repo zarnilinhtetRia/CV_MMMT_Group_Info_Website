@@ -20,8 +20,6 @@ class BlogPostController extends Controller
         $types = Type::all();
 
         $query = Blog::with(['category', 'type'])->withCount('comments');
-        // $blogs = Blog::with(['category', 'type'])->get();
-        // dd($blogs);
 
         if ($request->filled('title')) {
             $query->where('title', 'like', '%' . $request->title . '%');
@@ -35,7 +33,9 @@ class BlogPostController extends Controller
 
         $blogs = $query->get();
 
-        return view('frontend.frontend', compact('blogs', 'categories', 'types'));
+        $breakingNews = Blog::latest()->take(4)->get();
+
+        return view('frontend.frontend', compact('blogs', 'categories', 'types', 'breakingNews'));
     }
 
     public function blog_post_detail($id)

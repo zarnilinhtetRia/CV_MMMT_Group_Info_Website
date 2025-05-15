@@ -30,10 +30,6 @@
 
         }
 
-        .header h1 {
-            color: #2A53C1;
-        }
-
         @keyframes scroll-pause-left {
             0% {
                 transform: translateX(100%);
@@ -51,6 +47,12 @@
             100% {
                 transform: translateX(-100%);
             }
+        }
+
+        .title-height-limit {
+            max-height: 80px;
+            overflow: hidden;
+            white-space: normal;
         }
 
         .searchbtn {
@@ -178,10 +180,12 @@
                     <strong class="me-3">Breaking News:</strong>
 
                     <div class="ticker-container"
-                        style="flex: 1; overflow: hidden; position: relative; height: 30px; width: 100%;">
+                        style="flex: 1; overflow: hidden; position: relative; height: 20px; width: 100%;">
                         <div id="ticker-text" class="ticker-text scroll"
                             style="position: absolute; white-space: nowrap;">
-                            <span class="ms-2">{{ $blogs[0]->title ?? '' }}</span>
+                            @foreach ($breakingNews as $news)
+                                <span class="ms-2"> {{ $news->title }} </span>
+                            @endforeach
                         </div>
                     </div>
 
@@ -191,43 +195,54 @@
     </header>
 
     @foreach ($categories as $index => $category)
-        <div class=" mt-5 py-3" style="background-color: {{ $index % 2 == 0 ? 'white' : '#f2f2f2' }};">
-            <section class="container">
-                <h2 class="my-3 font-weight-bold posttitle">{{ $category->category }}</h2>
+        @php
+            $categoryBlogs = $blogs->where('category_id', $category->id);
+        @endphp
 
-                <div class="row">
-                    @foreach ($blogs->where('category_id', $category->id) as $blog)
-                        <div class="col-12 col-md-6 col-lg-4 d-flex mb-5">
-                            <div class="card h-100 w-100 d-flex flex-column p-4">
 
-                                <a href="{{ route('blog_post.detail', $blog->id) }}"
-                                    class="blog-link flex-grow-1 px-4">
-                                    <h2 class="mb-0">{{ $blog->title }}</h2>
-                                    <p class="description mt-3">
-                                        <br>
-                                        <span style="font-size: 2em; font-weight: bold;" class="ms-3">
-                                            {{ ucfirst(explode(' ', $blog->description)[0]) }}
+        @if ($categoryBlogs->count() > 0)
+            <div class=" mt-5 py-3" style="background-color: {{ $index % 2 == 0 ? 'white' : '#f2f2f2' }};">
+                <section class="container">
+                    <h2 class="my-3 font-weight-bold posttitle">{{ $category->category }}</h2>
+
+                    <div class="row">
+                        @foreach ($blogs->where('category_id', $category->id) as $blog)
+                            <div class="col-12 col-md-6 col-lg-4 d-flex mb-5">
+                                <div class="card h-100 w-100 d-flex flex-column p-4">
+
+                                    <a href="{{ route('blog_post.detail', $blog->id) }}"
+                                        class="blog-link flex-grow-1 px-4">
+                                        <h2 class="mb-0 w-100 overflow-hidden title-height-limit">{{ $blog->title }}
+                                        </h2>
+                                        <p class="description mt-3">
+                                            <br>
+                                            <span style="font-size: 1.5em; font-weight: bold;" class="ms-3">
+                                                {{ ucfirst(explode(' ', $blog->description)[0]) }}
+                                            </span>
+                                            {{ substr($blog->description, strlen(explode(' ', $blog->description)[0]), 100) }}....
+                                        </p>
+                                        <hr style="border-top: 1px solid #ccc; margin: 10px 0;">
+                                    </a>
+                                    <div class="d-flex justify-content-end">
+                                        <span class="text-muted">
+                                            💬 {{ $blog->comments_count }} comments
                                         </span>
-                                        {{ substr($blog->description, strlen(explode(' ', $blog->description)[0]), 100) }}....
-                                    </p>
-                                    <hr style="border-top: 1px solid #ccc; margin: 10px 0;">
-                                </a>
-                                <div class="d-flex justify-content-end">
-                                    <span class="text-muted">
-                                        💬 {{ $blog->comments_count }} comments
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
-            </section>
-        </div>
+                        @endforeach
+                    </div>
+                </section>
+            </div>
+        @endif
     @endforeach
 
     <footer class="py-3 mt-auto" style="background-color: #b49164;">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p>
+        <div class="container py-3">
+            <hr class="bg-light">
+            <div class="text-center small">
+                © 2025 by BlogPost. Powered and secured by <span class="text-white">SSE Web Solution</span>
+            </div>
         </div>
     </footer>
 
@@ -235,42 +250,39 @@
     {{-- For Text Scroll --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const titles = @json($blogs->pluck('title'));
             const tickerText = document.getElementById("ticker-text");
-            const span = tickerText.querySelector("span");
+            const spans = tickerText.querySelectorAll("span");
+            const container = document.querySelector('.ticker-container');
             let index = 0;
 
             function startScroll() {
-                // Set the new title
-                span.innerHTML = `<strong>${titles[index]}</strong>`;
+                // Hide all spans
+                spans.forEach(span => span.classList.add('d-none'));
 
-                const container = document.querySelector('.ticker-container');
+                // Show current span
+                const currentSpan = spans[index];
+                currentSpan.classList.remove('d-none');
 
-                // Reset position
+                // Reset ticker position
                 tickerText.style.transition = 'none';
-                tickerText.style.transform = `translateX(${container.offsetWidth}px)`; // Start from right
+                tickerText.style.transform = `translateX(${container.offsetWidth}px)`;
 
-                // Force reflow to apply starting position
-                void tickerText.offsetWidth;
+                void tickerText.offsetWidth; // Force reflow
 
-                // Calculate distance to move (from right edge to completely left)
-                const textWidth = tickerText.offsetWidth;
+                const textWidth = currentSpan.offsetWidth;
                 const containerWidth = container.offsetWidth;
                 const totalDistance = textWidth + containerWidth;
-
-                // Speed in px/ms — adjust as needed
-                const speed = 0.1; // lower = slower
+                const speed = 0.1; // px/ms
                 const duration = totalDistance / speed;
 
-                // Start scrolling
+                // Scroll
                 tickerText.style.transition = `transform ${duration}ms linear`;
                 tickerText.style.transform = `translateX(-${textWidth}px)`;
 
-                // After scrolling finishes
+                // On scroll end, move to next
                 setTimeout(() => {
-                    // Wait 0.5 seconds
                     setTimeout(() => {
-                        index = (index + 1) % titles.length;
+                        index = (index + 1) % spans.length;
                         startScroll();
                     }, 500);
                 }, duration);
@@ -279,6 +291,7 @@
             startScroll();
         });
     </script>
+
 
 </body>
 

@@ -180,7 +180,7 @@
                     @foreach ($blog->comments as $comment)
                         <div class=" mb-2">
                             <div class="card-body d-flex">
-                                <img src="http://bootdey.com/img/Content/user_1.jpg" alt="User"
+                                <img src="{{ asset('img/9e837528f01cf3f42119c5aeeed1b336.jpg') }}" alt="User"
                                     class="rounded-circle me-3" width="50" height="50">
                                 <div class="flex-grow-1">
                                     <div class="d-flex justify-content-between align-items-start">
@@ -252,9 +252,12 @@
     </div>
 
 
-    <footer class="py-3 mt-5" style="background-color: #b49164;">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p>
+    <footer class="py-3 mt-auto" style="background-color: #b49164;">
+        <div class="container py-3">
+            <hr class="bg-light">
+            <div class="text-center small">
+                © 2025 by BlogPost. Powered and secured by <span class="text-white">SSE Web Solution</span>
+            </div>
         </div>
     </footer>
 
