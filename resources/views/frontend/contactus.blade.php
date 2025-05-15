@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top">
-        <div class="container-fluid">
+<body class="d-flex flex-column min-vh-100" style="padding-top: 80px;">
+    <div class="container-fluid fixed-top" style="background-color: #b49164;">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
             <a class="navbar-brand" href="{{ url('/') }}">Blog Post</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,9 @@
                         <a class="nav-link" href="{{ route('about') }}">About</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#">All News</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
                     </li>
                     {{-- <li class="nav-item">
@@ -33,8 +36,8 @@
                     </li> --}}
                 </ul>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <div class="container mt-5" style="max-width: 600px;">
         <h5 class="text-center">Contact Us</h5>
@@ -69,13 +72,13 @@
                     <textarea class="form-control" id="remark" name="remark" rows="4" required autofocus></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn text-white" style="  background-color: #029055;">Submit</button>
                 </div>
             </div>
         </form>
     </div>
 
-    <footer class="py-3 bg-dark mt-auto">
+    <footer class="py-3 mt-auto" style="background-color: #b49164;">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p>
         </div>

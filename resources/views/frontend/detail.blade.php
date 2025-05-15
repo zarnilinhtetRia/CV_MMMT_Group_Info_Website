@@ -12,11 +12,32 @@
             font-weight: bold;
             font-size: 2em;
         }
+
+        .categorybtn {
+            background-color: #029055;
+            color: white;
+        }
+
+        .categorybtn:hover {
+            background-color: white;
+            border-color: #029055;
+            color: #029055;
+        }
+
+        .typebtn {
+            border-color: #029055;
+            color: #029055;
+        }
+
+        .typebtn:hover {
+            background-color: #029055;
+            color: white;
+        }
     </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100" style="padding-top: 80px;">
-    <div class="container-fluid fixed-top" style="background-color: #2A53C1;">
+    <div class="container-fluid fixed-top" style="background-color: #b49164;">
         <nav class="navbar navbar-expand-lg navbar-dark py-3">
             <a class="navbar-brand" href="{{ url('/') }}">Blog Post</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -51,17 +72,17 @@
                 <div class="d-flex flex-md-row flex-column align-items-md-center align-items-center w-100">
 
                     <!-- Headline (stacked center on small, row on md+) -->
-                    <h1 class="mb-2 mb-md-0 font-weight-bold" style="font-size: 60px; color:#172a47;">
+                    <h1 class="mb-2 mb-md-0 font-weight-bold" style="font-size: 60px; color:#b49164;">
                         BlogPost
                     </h1>
 
                     <!-- Vertical Line (only on md+) -->
                     <div class="d-none d-md-block"
-                        style="width: 4px; height: 65px; background-color: #172a47; margin: 0 15px;">
+                        style="width: 4px; height: 65px; background-color: #b49164; margin: 0 15px;">
                     </div>
 
                     <!-- Subtitle -->
-                    <p class="mb-0" style="font-size: 16px; color:#172a47;">
+                    <p class="mb-0" style="font-size: 16px; color:#b49164;">
                         News & Opinion Blog
                     </p>
                 </div>
@@ -93,8 +114,8 @@
                     </p>
 
                     <div class="text-start mb-3">
-                        <span class="btn btn-outline-secondary text-dark my-2">{{ $blog->category->category }}</span>
-                        <span class="btn btn-outline-secondary text-dark my2">{{ $blog->type->type }}</span>
+                        <span class="btn categorybtn my-2">{{ $blog->category->category }}</span>
+                        <span class="btn typebtn my2">{{ $blog->type->type }}</span>
                     </div>
 
                     <hr>
@@ -113,7 +134,7 @@
     <div class="container mt-5 px-0">
         <div class="d-flex justify-content-center">
             <div class="card shadow p-4 w-75 rounded-4 border" style="border-color: #dee2e6;">
-                <h3 style="color:#172a47;" class="mb-3">Recent Posts</h3>
+                <h3 style="color:#b49164;" class="mb-3">Recent Posts</h3>
 
                 @if ($recentPosts->count() > 0)
                     <div class="row">
@@ -154,7 +175,7 @@
         <div class="d-flex row justify-content-center">
             <div class="card shadow p-4 w-75 rounded-4 border" style="border-color: #dee2e6;">
                 <div class="col-md-12">
-                    <h5 class="card-title mb-3">Comments</h5>
+                    <h5 class="card-title mb-3" style="color: #b49164;">Comments</h5>
                     <hr>
                     @foreach ($blog->comments as $comment)
                         <div class=" mb-2">
@@ -177,9 +198,9 @@
                                     {{-- Edit View --}}
                                     <div id="comment-edit-{{ $comment->id }}" style="display: none;">
                                         <textarea class="form-control mb-2" id="comment-textarea-{{ $comment->id }}">{{ $comment->comment }}</textarea>
-                                        <button class="btn btn-sm btn-success"
+                                        <button class="btn btn-sm" style="background-color:#029055;"
                                             onclick="updateComment({{ $comment->id }})">Update</button>
-                                        <button class="btn btn-sm btn-secondary"
+                                        <button class="btn btn-sm btn-outline-secondary"
                                             onclick="cancelEdit({{ $comment->id }})">Cancel</button>
                                     </div>
 
@@ -218,9 +239,10 @@
                                     required></textarea>
                             </div>
                             <div id="commentActions" class="d-none justify-content-end gap-2 mt-2">
-                                <button type="button" id="cancelBtn" class="btn btn-secondary mx-2">Cancel</button>
+                                <button type="button" id="cancelBtn"
+                                    class="btn btn-outline-secondary mx-2">Cancel</button>
                                 <button type="submit" class="btn text-white"
-                                    style="background-color:#172a47;">Publish</button>
+                                    style="background-color:#029055;">Publish</button>
                             </div>
                         </form>
                     </div>
@@ -230,7 +252,7 @@
     </div>
 
 
-    <footer class="py-3 bg-dark mt-5">
+    <footer class="py-3 mt-5" style="background-color: #b49164;">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p>
         </div>

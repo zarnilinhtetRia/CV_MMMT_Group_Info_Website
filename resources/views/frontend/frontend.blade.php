@@ -53,8 +53,12 @@
             }
         }
 
+        .searchbtn {
+            background-color: #029055;
+        }
+
         .posttitle {
-            color: #172a47;
+            color: #b49164;
         }
 
         .blog-link {
@@ -63,14 +67,14 @@
         }
 
         .blog-link:hover {
-            color: #2A53C1;
+            color: #029055;
             text-decoration: none;
         }
     </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100" style="padding-top: 80px;">
-    <div class="container-fluid fixed-top" style="background-color: #2A53C1;">
+    <div class="container-fluid fixed-top" style="background-color: #b49164;">
         <nav class="navbar navbar-expand-lg navbar-dark py-3">
             <a class="navbar-brand" href="{{ url('/') }}">Blog Post</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -105,17 +109,17 @@
                 <div class="d-flex flex-md-row flex-column align-items-md-center align-items-center w-100">
 
                     <!-- Headline (stacked center on small, row on md+) -->
-                    <h1 class="mb-2 mb-md-0 font-weight-bold" style="font-size: 60px; color:#172a47;">
+                    <h1 class="mb-2 mb-md-0 font-weight-bold" style="font-size: 60px; color:#b49164;">
                         BlogPost
                     </h1>
 
                     <!-- Vertical Line (only on md+) -->
                     <div class="d-none d-md-block"
-                        style="width: 4px; height: 65px; background-color:#172a47; margin: 0 15px;">
+                        style="width: 4px; height: 65px; background-color:#b49164; margin: 0 15px;">
                     </div>
 
                     <!-- Subtitle -->
-                    <p class="mb-0" style="font-size: 16px; color:#172a47;">
+                    <p class="mb-0" style="font-size: 16px; color:#b49164;">
                         News & Opinion Blog
                     </p>
                 </div>
@@ -163,13 +167,13 @@
                 </div>
 
                 <div class="col-md-2 col-sm-6 my-3">
-                    <button type="submit" class="btn btn-secondary w-100">ရှာရန်</button>
+                    <button type="submit" class="btn searchbtn w-100 text-white">ရှာရန်</button>
                 </div>
             </form>
 
             <div class="breaking-news-wrapper">
-                <div class="breaking-news bg-primary text-white rounded shadow d-flex align-items-center px-4"
-                    style="height: 50px; overflow: hidden;">
+                <div class="breaking-news text-white rounded shadow d-flex align-items-center px-4"
+                    style="height: 50px; overflow: hidden; background-color:#b49164;">
 
                     <strong class="me-3">Breaking News:</strong>
 
@@ -221,7 +225,7 @@
         </div>
     @endforeach
 
-    <footer class="py-3 mt-auto" style="background-color: #172a47;">
+    <footer class="py-3 mt-auto" style="background-color: #b49164;">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p>
         </div>

@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 sticky-top">
-        <div class="container-fluid">
+<body class="d-flex flex-column min-vh-100" style="padding-top: 80px;">
+    <div class="container-fluid fixed-top" style="background-color: #b49164;">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
             <a class="navbar-brand" href="{{ url('/') }}">Blog Post</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,10 +20,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link " href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">All News</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
@@ -33,8 +36,8 @@
                     </li> --}}
                 </ul>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <!-- Main Content -->
     <div class="container flex-grow-1 py-5">
@@ -104,7 +107,7 @@
         </div>
     </div>
 
-    <footer class="py-3 bg-dark mt-auto">
+    <footer class="py-3 mt-auto" style="background-color: #b49164;">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; Your Website 2025</p>
         </div>
