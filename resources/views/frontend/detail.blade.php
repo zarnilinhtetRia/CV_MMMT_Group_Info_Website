@@ -33,6 +33,17 @@
             background-color: #029055;
             color: white;
         }
+
+        .post-link {
+            text-decoration: none;
+            color: black;
+            transition: color 0.3s ease;
+        }
+
+        .post-link:hover .card-title,
+        .post-link:hover .card-text {
+            color: #029055;
+        }
     </style>
 </head>
 
@@ -142,14 +153,14 @@
                             <div class="col-12 col-md-6 col-lg-4">
                                 <div class="card mb-4">
                                     <div class="card-body">
-                                        <a href="{{ route('blog_post.detail', $post->id) }}"
+                                        <a href="{{ route('blog_post.detail', $post->id) }}" class="post-link"
                                             style="text-decoration: none; color: #172a47;">
                                             <h4 class="card-title">{{ $post->title }}</h4>
+
+                                            <p class="card-text">{{ Str::limit($post->description, 70) }}</p>
                                         </a>
-                                        <p class="card-text">{{ Str::limit($post->description, 70) }}</p>
+
                                         <hr>
-
-
                                         <div class="d-flex justify-content-end">
                                             <span class="text-muted">
                                                 💬 {{ $post->comments_count }} comments
