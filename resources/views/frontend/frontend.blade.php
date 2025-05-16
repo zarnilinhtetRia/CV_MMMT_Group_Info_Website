@@ -130,7 +130,7 @@
     </div>
 
     <header class="py-3 bg-light border-bottom mb-4 d-flex align-items-start position-relative"
-        style="background: url('{{ asset('img/blog_banner.jpg') }}') center/cover no-repeat;  min-height: 400px;">
+        style="background: url('{{ asset('img/viber_image_2025-05-17_02-09-32-715.jpg') }}') center/cover no-repeat;  min-height: 400px;">
 
         <div class="container">
             <div class="text-center pt-3 my-3">
