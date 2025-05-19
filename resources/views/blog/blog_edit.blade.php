@@ -50,7 +50,8 @@
                                     <h4 class="cade-title text-center">Blog Edit</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ route('blogs.update', $blog->id) }}" method="POST">
+                                    <form action="{{ route('blogs.update', $blog->id) }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="card-body">
@@ -83,6 +84,18 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="image">Image <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" name="image"
+                                                    accept="image/*">
+
+                                                @if ($blog->image)
+                                                    <div class="mt-2">
+                                                        <p>Current Image:</p>
+                                                        <img src="{{ $blog->image }}" alt="Blog Image" width="150">
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">Description<span

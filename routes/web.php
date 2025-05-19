@@ -42,7 +42,6 @@ Route::put('/comments/{comment}', [BlogPostController::class, 'updateComment'])-
 Route::delete('/comments/{comment}', [BlogPostController::class, 'deleteComment'])->name('comments.destroy');
 
 
-
 //About
 Route::get('/about', function () {
     return view('frontend.about');

@@ -96,6 +96,13 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="image">Image<span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="file" class="form-control-file" id="image"
+                                                        name="image" required>
+                                                </div>
+
+                                                <div class="form-group">
                                                     <label for="description">Description<span
                                                             class="text-danger">*</span></label>
                                                     <textarea class="form-control" id="description" name="description" rows="3" required autofocus></textarea>
@@ -149,25 +156,27 @@
                                                     @endif
                                                 @endforeach
 
-                                                <td>User Name</td>
+                                                <td>{{ $blog->user->name }}</td>
                                                 <td>{{ $blog->created_at->format('d M Y') }}</td>
                                                 <td>
                                                     <a href="{{ route('blogs.show', $blog->id) }}"
                                                         class="btn btn-primary btn-sm"><i class="far fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ route('blogs.edit', $blog->id) }}"
-                                                        class="btn btn-success btn-sm"><i
-                                                            class="fas fa-pencil-alt"></i>
-                                                    </a>
-                                                    <form action="{{ route('blogs.destroy', $blog->id) }}"
-                                                        method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Are you sure you want to delete this Blog ?')">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
+                                                    @if (auth()->id() === $blog->user_id || auth()->user()->role === 'admin')
+                                                        <a href="{{ route('blogs.edit', $blog->id) }}"
+                                                            class="btn btn-success btn-sm"><i
+                                                                class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <form action="{{ route('blogs.destroy', $blog->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('Are you sure you want to delete this Blog ?')">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

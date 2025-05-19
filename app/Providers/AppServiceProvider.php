@@ -22,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+
         // Route::middleware('role.user', EnsureUserRole::class);
         // // Route::aliasMiddleware('role.user', EnsureUserRole::class);
 
