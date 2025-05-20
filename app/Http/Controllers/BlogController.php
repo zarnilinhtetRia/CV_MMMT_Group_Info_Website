@@ -24,25 +24,48 @@ class BlogController extends Controller
         //
     }
 
+    // public function store(Request $request)
+    // {
+    //     // dd($request);
+    //     $blogs = Blog::create($request->all());
+    //     // Automatically assign the currently logged-in user
+    //     $blogs->user_id = Auth::id();
+
+    //     // handle image if uploaded
+    //     if ($request->hasFile('image')) {
+    //         $image = $request->file('image');
+    //         $imageName = time() . '_' . $image->getClientOriginalName();
+    //         $image->move(public_path('img/'), $imageName);
+    //         $blogs->image = '/img/' . $imageName;
+    //     }
+
+    //     $blogs->save();
+
+    //     return redirect()->route('blogs.index');
+    // }
+
     public function store(Request $request)
     {
-        // dd($request);
+        // Validate your inputs here before creating
+
+        // Create blog without image first
         $blogs = Blog::create($request->all());
-        // Automatically assign the currently logged-in user
         $blogs->user_id = Auth::id();
 
-        // handle image if uploaded
+        // Handle image upload if uploaded
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('img/'), $imageName);
-            $blogs->image = '/img/' . $imageName;
+            $image->move(public_path('img'), $imageName);  // Save to public/img folder
+            $blogs->image = $imageName;  // Save only the file name
         }
 
         $blogs->save();
 
         return redirect()->route('blogs.index');
     }
+
+
 
     public function show(string $id)
     {
@@ -62,26 +85,29 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         // Update blog fields except image and user_id
+        // Avoid mass updating user_id or image via request (optional but safer)
         $blog->fill($request->except(['image', 'user_id']));
 
-        // handle image if uploaded
+        // Handle image upload if new image uploaded
         if ($request->hasFile('image')) {
-            // Delete old image if it exists
-            if ($blog->image && file_exists(public_path($blog->image))) {
-                unlink(public_path($blog->image));
+            // Delete old image file if exists
+            if ($blog->image && file_exists(public_path('img/' . $blog->image))) {
+                unlink(public_path('img/' . $blog->image));
             }
 
-            // Save new image
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('img/'), $imageName);
-            $blog->image = '/img/' . $imageName;
+            $image->move(public_path('img'), $imageName);
+            $blog->image = $imageName;  // Save only filename
         }
 
         $blog->save();
 
         return redirect()->route('blogs.index')->with('success', 'Blog updated successfully!');
     }
+
+
+
 
 
     public function destroy(string $id)

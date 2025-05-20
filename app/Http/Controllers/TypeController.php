@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Type;
+use App\Models\Category;
 
 class TypeController extends Controller
 {
     public function index()
     {
-        $types = Type::all();
-        return view('type.type',compact('types'));
+        $types = Type::with('category')->get();
+        $categories = Category::all();
+        return view('type.type', compact('types', 'categories'));
     }
 
     public function create()
@@ -20,10 +22,14 @@ class TypeController extends Controller
 
     public function store(Request $request)
     {
-        $types = Type::create($request->all());
-        $types->save();
+        $request->validate([
+            'type' => 'required|string|max:191',
+            'category_id' => 'nullable|exists:categories,id',
+        ]);
 
-        return redirect()->route('types.index');
+        Type::create($request->only('type', 'category_id'));
+
+        return redirect()->route('types.index')->with('success', 'Type created successfully.');
     }
 
     public function show(string $id)
@@ -34,7 +40,7 @@ class TypeController extends Controller
     public function edit(string $id)
     {
         $type = Type::find($id);
-        return view('type.type_edit',compact('type'));
+        return view('type.type_edit', compact('type'));
     }
 
     public function update(Request $request, string $id)

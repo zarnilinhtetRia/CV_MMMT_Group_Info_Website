@@ -29,6 +29,7 @@
                                     </li>
                                 </ol>
                             </div>
+
                         </div>
                     </div>
                 </section>
@@ -68,6 +69,17 @@
                                             @csrf
                                             <div class="card-body">
                                                 <div class="form-group">
+                                                    <label for="category_id">Category <span
+                                                            class="text-danger">*</span></label>
+                                                    <select name="category_id" class="form-control">
+                                                        <option value="" selected>Choose Category</option>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}">
+                                                                {{ $category->category }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="type">Type Name<span
                                                             class="text-danger">*</span></label>
                                                     <input type="text" class="form-control" id="type"
@@ -96,6 +108,7 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
+                                            <th>Category Name</th>
                                             <th>Type Name</th>
                                             <th>Date</th>
                                             <th>Action</th>
@@ -105,6 +118,7 @@
                                         @foreach ($types as $key => $type)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
+                                                <td>{{ $type->category->category }}</td>
                                                 <td>{{ $type->type }}</td>
                                                 <td>{{ $type->created_at->format('d M Y') }}</td>
                                                 <td>

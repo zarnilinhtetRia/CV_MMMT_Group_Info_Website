@@ -42,6 +42,8 @@ class BlogPostController extends Controller
     {
         // $blog = Blog::find($id);
         $blog = Blog::with(['category', 'type', 'comments.user'])->withCount('comments')->findOrFail($id);
+        $categories = Category::with('types')->get();
+        // $types = Type::all();
 
         $recentPosts = Blog::with(['comments.user']) // ✅ Eager load comments with user
             ->withCount('comments')                  // ✅ Count comments
@@ -51,7 +53,8 @@ class BlogPostController extends Controller
             ->take(3)
             ->get();
 
-        return view('frontend.detail', compact('blog', 'recentPosts'));
+
+        return view('frontend.detail', compact('blog', 'recentPosts', 'categories'));
     }
 
     public function searchBlog(Request $request)

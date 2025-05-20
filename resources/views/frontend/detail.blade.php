@@ -1,143 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog Post Detail</title>
-    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
-    <style>
-        .description::first-line {
-            font-weight: bold;
-            font-size: 2em;
-        }
-
-        .categorybtn {
-            background-color: #029055;
-            color: white;
-        }
-
-        .categorybtn:hover {
-            background-color: white;
-            border-color: #029055;
-            color: #029055;
-        }
-
-        .typebtn {
-            border-color: #029055;
-            color: #029055;
-        }
-
-        .typebtn:hover {
-            background-color: #029055;
-            color: white;
-        }
-
-        .post-link {
-            text-decoration: none;
-            color: black;
-            transition: color 0.3s ease;
-        }
-
-        .post-link:hover .card-title,
-        .post-link:hover .card-text {
-            color: #029055;
-        }
-    </style>
-</head>
-
-<body class="d-flex flex-column min-vh-100" style="padding-top: 80px;">
-    <div class="container-fluid fixed-top" style="background-color: #b49164;">
-        <nav class="navbar navbar-expand-lg navbar-dark py-3">
-            <a class="navbar-brand" href="{{ url('/') }}">Blog Post</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('about') }}">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">All News</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
-                    </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/userlogin') }}">Login</a>
-                    </li> --}}
-                </ul>
-            </div>
-        </nav>
-    </div>
-
-    <div class="header text-md-left text-center py-4 bg-white">
-        <div class="container-fluid pl-md-5 pl-3">
-            <div class="row justify-content-start">
-                <div class="d-flex flex-md-row flex-column align-items-md-center align-items-center w-100">
-
-                    <!-- Headline (stacked center on small, row on md+) -->
-                    <h1 class="mb-2 mb-md-0 font-weight-bold" style="font-size: 60px; color:#b49164;">
-                        BlogPost
-                    </h1>
-
-                    <!-- Vertical Line (only on md+) -->
-                    <div class="d-none d-md-block"
-                        style="width: 4px; height: 65px; background-color: #b49164; margin: 0 15px;">
-                    </div>
-
-                    <!-- Subtitle -->
-                    <p class="mb-0" style="font-size: 16px; color:#b49164;">
-                        News & Opinion Blog
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+@extends('layouts.frontend')
+@section('content')
     {{-- Blog Post Section --}}
     <div class="container mt-5 px-0">
-        <div class="d-flex justify-content-center">
-            <div class="card shadow p-4 w-75 rounded-4 border" style="border-color: #dee2e6;">
-                <div class="card-body">
-                    <p class="text-muted text-end mb-2" style="text-align: right;">
-                        {{ $blog->created_at->format('M d, Y') }}
-                    </p>
-
-                    <h3 class="card-title fw-bold" style="font-weight: bolder; font-size: 2rem; text-align: left;">
-                        {{ $blog->title }}
-                    </h3>
-                    <p class="description mt-3">
-                        <br>
-                        <span style="font-size: 1em; font-weight: bold;" class="ms-3">
-                            {{ ucfirst(substr($blog->description, 0, strpos($blog->description, '.'))) . '.' }}
-                        </span>
-                        <br><br>
-                        <span>
-                            {{ substr($blog->description, strpos($blog->description, '.') + 1) }}
-                        </span>
-                    </p>
-
-                    <div class="text-start mb-3">
-                        <span class="btn categorybtn my-2">{{ $blog->category->category }}</span>
-                        <span class="btn typebtn my2">{{ $blog->type->type }}</span>
+        <div class="row justify-content-center">
+            {{-- Sidebar --}}
+            <div class="col-12 col-md-3 mb-4">
+                <div class="card shadow-sm border overflow-hidden" style="border-radius: 2rem;">
+                    <div class="px-3 py-2"
+                        style="background-color: #41372f; border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
+                        <h4 class="fw-bold mb-0 text-white text-center">Categories</h4>
                     </div>
+                    <div class="card-body p-0">
+                        @foreach ($categories as $category)
+                            <a href="{{ $category->id }}"
+                                class="d-block px-3 py-2 text-decoration-none text-dark border-bottom"
+                                style="background-color: #e7ddd2;">
+                                * {{ $category->category }}
+                            </a>
+                        @endforeach
 
-                    <hr>
-                    <div class="d-flex justify-content-end">
-                        <span class="text-muted">
-                            💬 {{ $blog->comments_count }} comments
-                        </span>
                     </div>
-                    <hr>
                 </div>
             </div>
+
+            {{-- <div class="col-md-3 mb-4">
+                <div class="card shadow-sm border overflow-hidden" style="border-radius: 2rem;">
+                    <div class="px-3 py-2"
+                        style="background-color: #41372f; border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
+                        <h4 class="fw-bold mb-0 text-white text-center">Categories</h4>
+                    </div>
+                    <div class="card-body p-0" style="background-color: #e7ddd2;">
+                        @foreach ($categories as $category)
+                            <div class="px-3 py-2 border-bottom">
+                                @if ($category->types->count())
+                                    <div class="dropdown w-100">
+                                        <button class="btn dropdown-toggle w-100 text-left font-weight-bold" type="button"
+                                            id="dropdownMenuButton{{ $category->id }}" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false"
+                                            style="background-color: transparent; border: none;">
+                                            * {{ $category->category }}
+                                        </button>
+                                        <div class="dropdown-menu w-100"
+                                            aria-labelledby="dropdownMenuButton{{ $category->id }}">
+                                            @foreach ($category->types as $type)
+                                                <a class="dropdown-item" href="{{ url('your-url/' . $type->id) }}">
+                                                    {{ $type->type }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @else
+                                    <strong>* {{ $category->category }}</strong>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div> --}}
+
+            <div class=" col-12 col-md-9">
+                <div class="card shadow p-4 rounded-4 border mx-auto" style="border-color: #dee2e6; max-width: 75%;">
+                    <div class="card-body">
+                        <p class="text-muted text-end mb-2" style="text-align: right;">
+                            {{ $blog->created_at->format('M d, Y') }}
+                        </p>
+
+                        @if ($blog->image)
+                            <img src="{{ asset('img/' . $blog->image) }}" class="img-fluid rounded-3 mb-3" alt="Blog Image"
+                                style="width: 100%;">
+                        @else
+                            <img src="{{ asset('img/no-image.jpg') }}" class="img-fluid rounded-3 mb-3" alt="Blog Image"
+                                style="width: 100%;">
+                        @endif
+
+                        <h3 class="card-title fw-bold" style="font-weight: bolder; font-size: 2rem; text-align: left;">
+                            {{ $blog->title }}
+                        </h3>
+                        <p class="description mt-3">
+                            <br>
+                            <span style="font-size: 1em; font-weight: bold;" class="ms-3">
+                                {{ ucfirst(substr($blog->description, 0, strpos($blog->description, '.'))) . '.' }}
+                            </span>
+                            <br><br>
+                            <span>
+                                {{ substr($blog->description, strpos($blog->description, '.') + 1) }}
+                            </span>
+                        </p>
+
+                        <div class="text-start mb-3">
+                            <span class="btn categorybtn my-2">{{ $blog->category->category }}</span>
+                            <span class="btn typebtn my2">{{ $blog->type->type }}</span>
+                        </div>
+
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <span class="text-muted">
+                                💬 {{ $blog->comments_count }} comments
+                            </span>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -150,21 +115,28 @@
                 @if ($recentPosts->count() > 0)
                     <div class="row">
                         @foreach ($recentPosts as $post)
-                            <div class="col-12 col-md-6 col-lg-4">
+                            <div class="col-12 col-md-6">
                                 <div class="card mb-4">
                                     <div class="card-body">
-                                        <a href="{{ route('blog_post.detail', $post->id) }}" class="post-link"
-                                            style="text-decoration: none; color: #172a47;">
-                                            <h4 class="card-title">{{ $post->title }}</h4>
+                                        @if ($post->image)
+                                            <img src="{{ asset('img/' . $post->image) }}" class="card-img-top"
+                                                alt="Blog Image" style="height: 200px;  width: 100%; object-fit: cover;">
+                                        @else
+                                            <img src="{{ asset('img/no-image.jpg') }}" class="card-img-top"
+                                                alt="Blog Image" style="height: 200px;  width: 100%; object-fit: cover;">
+                                        @endif
 
-                                            <p class="card-text">{{ Str::limit($post->description, 70) }}</p>
-                                        </a>
+                                        <h4 class="card-title">{{ $post->title }}</h4>
+
+                                        <p class="card-text">{{ Str::limit($post->description, 70) }}</p>
 
                                         <hr>
-                                        <div class="d-flex justify-content-end">
+                                        <div class="d-flex justify-content-between p-2">
                                             <span class="text-muted">
-                                                💬 {{ $post->comments_count }} comments
+                                                💬 {{ $blog->comments_count }} comments
                                             </span>
+                                            <a href="{{ route('blog_post.detail', $post->id) }}" class="btn morebtn">More
+                                                Detail</a>
                                         </div>
                                         <hr>
                                     </div>
@@ -179,7 +151,6 @@
             </div>
         </div>
     </div>
-
 
     {{-- Comment Section --}}
     <div class="container mt-4">
@@ -209,17 +180,16 @@
                                     {{-- Edit View --}}
                                     <div id="comment-edit-{{ $comment->id }}" style="display: none;">
                                         <textarea class="form-control mb-2" id="comment-textarea-{{ $comment->id }}">{{ $comment->comment }}</textarea>
-                                        <button class="btn btn-sm" style="background-color:#029055;"
+                                        <button class="btn btn-sm text-white" style="background-color:#382e26;"
                                             onclick="updateComment({{ $comment->id }})">Update</button>
-                                        <button class="btn btn-sm btn-outline-secondary"
+                                        <button class="btn btn-sm typebtn"
                                             onclick="cancelEdit({{ $comment->id }})">Cancel</button>
                                     </div>
 
                                     {{-- Action Buttons --}}
                                     @if (Auth::check() && Auth::id() === $comment->user_id)
                                         <div>
-                                            <a href="javascript:void(0);"
-                                                class="btn btn-link text-primary p-0 me-3 small"
+                                            <a href="javascript:void(0);" class="btn btn-link text-primary p-0 me-3 small"
                                                 onclick="showEditBox({{ $comment->id }})">Edit</a>
 
                                             <form action="{{ route('comments.destroy', $comment) }}" method="POST"
@@ -250,10 +220,9 @@
                                     required></textarea>
                             </div>
                             <div id="commentActions" class="d-none justify-content-end gap-2 mt-2">
-                                <button type="button" id="cancelBtn"
-                                    class="btn btn-outline-secondary mx-2">Cancel</button>
+                                <button type="button" id="cancelBtn" class="btn typebtn mx-2">Cancel</button>
                                 <button type="submit" class="btn text-white"
-                                    style="background-color:#029055;">Publish</button>
+                                    style="background-color:#382e26;">Publish</button>
                             </div>
                         </form>
                     </div>
@@ -262,83 +231,67 @@
         </div>
     </div>
 
-
-    <footer class="py-3 mt-auto" style="background-color: #b49164;">
-        <div class="container py-3">
-            <hr class="bg-light">
-            <div class="text-center small">
-                © 2025 by BlogPost. Powered and secured by <span class="text-white">SSE Web Solution</span>
-            </div>
-        </div>
-    </footer>
-
-
-
-    <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend/js/jquery.slim.min.js') }}"></script>
-
+    <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
+    {{-- for comment CRUD --}}
     <script>
         function showEditBox(id) {
-            document.getElementById('comment-display-' + id).style.display = 'none';
-            document.getElementById('comment-edit-' + id).style.display = 'block';
+            document.getElementById("comment-display-" + id).style.display = "none";
+            document.getElementById("comment-edit-" + id).style.display = "block";
         }
 
         function cancelEdit(id) {
-            document.getElementById('comment-display-' + id).style.display = 'block';
-            document.getElementById('comment-edit-' + id).style.display = 'none';
+            document.getElementById("comment-display-" + id).style.display = "block";
+            document.getElementById("comment-edit-" + id).style.display = "none";
         }
 
         function updateComment(id) {
-            const comment = document.getElementById('comment-textarea-' + id).value;
-            const token = '{{ csrf_token() }}';
+            const comment = document.getElementById("comment-textarea-" + id).value;
+            const token = "{{ csrf_token() }}";
 
             fetch(`/comments/${id}`, {
-                    method: 'PUT',
+                    method: "PUT",
                     headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': token
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": token,
                     },
                     body: JSON.stringify({
-                        comment
-                    })
+                        comment,
+                    }),
                 })
-                .then(response => response.json())
-                .then(data => {
+                .then((response) => response.json())
+                .then((data) => {
                     if (data.success) {
-                        document.getElementById('comment-text-' + id).innerText = comment;
+                        document.getElementById("comment-text-" + id).innerText =
+                            comment;
                         cancelEdit(id);
                     } else {
-                        alert('Failed to update comment.');
+                        alert("Failed to update comment.");
                     }
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Something went wrong.');
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Something went wrong.");
                 });
         }
     </script>
 
-
-    {{-- For CommentBox --}}
     <script>
+        // For Comment Box
         $(document).ready(function() {
-            const $textarea = $('#commentBox');
-            const $commentActions = $('#commentActions');
+            const $textarea = $("#commentBox");
+            const $commentActions = $("#commentActions");
 
-            $textarea.on('focus', function() {
-                $(this).attr('rows', 3);
-                $commentActions.removeClass('d-none').addClass('d-flex');
+            $textarea.on("focus", function() {
+                $(this).attr("rows", 3);
+                $commentActions.removeClass("d-none").addClass("d-flex");
             });
 
-            $('#cancelBtn').on('click', function() {
-                $textarea.attr('rows', 1).val('');
-                $commentActions.removeClass('d-flex').addClass('d-none');
+            $("#cancelBtn").on("click", function() {
+                $textarea.attr("rows", 1).val("");
+                $commentActions.removeClass("d-flex").addClass("d-none");
             });
         });
     </script>
 
 
-
-</body>
-
-</html>
+@endsection
