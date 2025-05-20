@@ -35,8 +35,8 @@ class BlogController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('uploads/blogs'), $imageName);
-            $blogs->image = 'uploads/blogs/' . $imageName;
+            $image->move(public_path('img/'), $imageName);
+            $blogs->image = '/img/' . $imageName;
         }
 
         $blogs->save();
@@ -59,37 +59,30 @@ class BlogController extends Controller
         return view('blog.blog_edit', compact('blog', 'categories', 'types'));
     }
 
-    public function update(Request $request,  Blog $blog)
+    public function update(Request $request, Blog $blog)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-            'type_id' => 'required|exists:types,id',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        // Update blog fields except image and user_id
+        $blog->fill($request->except(['image', 'user_id']));
 
-        $blog->title = $request->title;
-        $blog->category_id = $request->category_id;
-        $blog->type_id = $request->type_id;
-        $blog->description = $request->description;
-
+        // handle image if uploaded
         if ($request->hasFile('image')) {
-            // Delete old image
-            if ($blog->image && file_exists(public_path('storage/blog_images/' . $blog->image))) {
-                unlink(public_path('storage/blog_images/' . $blog->image));
+            // Delete old image if it exists
+            if ($blog->image && file_exists(public_path($blog->image))) {
+                unlink(public_path($blog->image));
             }
 
             // Save new image
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->storeAs('public/blog_images', $imageName);
-            $blog->image = $imageName;
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('img/'), $imageName);
+            $blog->image = '/img/' . $imageName;
         }
 
         $blog->save();
 
-        return redirect()->route('blogs.index');
+        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully!');
     }
+
 
     public function destroy(string $id)
     {

@@ -87,16 +87,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="image">Image <span class="text-danger">*</span></label>
-                                                <input type="file" class="form-control" name="image"
+                                                <input type="file" class="form-control" name="new_image"
                                                     accept="image/*">
 
-                                                @if ($blog->image)
-                                                    <div class="mt-2">
-                                                        <p>Current Image:</p>
-                                                        <img src="{{ $blog->image }}" alt="Blog Image" width="150">
-                                                    </div>
-                                                @endif
+                                                <img src="{{ asset('img/' . $blog->image) }}" alt=""
+                                                    width="80px" height="80px">
                                             </div>
+
                                             <div class="form-group">
                                                 <label for="description">Description<span
                                                         class="text-danger">*</span></label>
