@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Type;
 use App\Models\Comment;
 use App\Models\Reaction;
+use App\Models\BreakingNews;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -33,9 +34,9 @@ class BlogPostController extends Controller
 
         $blogs = $query->get();
 
-        $breakingNews = Blog::latest()->take(4)->get();
+        $breakingnews = BreakingNews::latest()->take(4)->get();
 
-        return view('frontend.frontend', compact('blogs', 'categories', 'types', 'breakingNews'));
+        return view('frontend.frontend', compact('blogs', 'categories', 'types', 'breakingnews'));
     }
 
     public function blog_post_detail($id)
@@ -55,6 +56,26 @@ class BlogPostController extends Controller
 
 
         return view('frontend.detail', compact('blog', 'recentPosts', 'categories'));
+    }
+
+    public function allnews(Request $request)
+    {
+        $categories = Category::all();
+        $types = Type::all();
+        $query = Blog::with(['category', 'type'])->withCount('comments');
+
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+        if ($request->filled('type')) {
+            $query->where('type_id', $request->type);
+        }
+
+        $blogs = $query->get();
+        return view('frontend.allnews', compact('categories', 'types', 'blogs'));
     }
 
     public function searchBlog(Request $request)

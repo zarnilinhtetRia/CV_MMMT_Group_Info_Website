@@ -91,6 +91,12 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link" href="{{ url('breakingnews') }}">
+                <i class="fas fa-newspaper"></i>
+                <span>Breaking News</span></a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link" href="{{ url('users') }}">
                 <i class="fas fa-users"></i>
                 <span>User Type</span></a>

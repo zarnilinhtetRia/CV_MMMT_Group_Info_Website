@@ -40,7 +40,8 @@ class TypeController extends Controller
     public function edit(string $id)
     {
         $type = Type::find($id);
-        return view('type.type_edit', compact('type'));
+        $categories = Category::all();
+        return view('type.type_edit', compact('type', 'categories'));
     }
 
     public function update(Request $request, string $id)

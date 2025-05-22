@@ -56,68 +56,11 @@
         </div>
     </div>
 
-    {{-- Carousel Section --}}
-    <div class="container-fluid my-3">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>
-
-            <!-- Carousel Inner -->
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('img/isiam1.jpeg') }}" class="d-block w-100 carousel-img" alt="Slide 4">
-                </div>
-                <div class="carousel-item ">
-                    <img src="{{ asset('img/isiam4.jpg') }}" class="d-block w-100 carousel-img" alt="Slide 1">
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('img/isiam2.jpg') }}" class="d-block w-100 carousel-img" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('img/isiam3.jpg') }}" class="d-block w-100 carousel-img" alt="Slide 3">
-                </div>
-            </div>
-
-            <!-- Controls -->
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Breaking News Bar (Below Carousel) -->
-    <div class="breaking-news-wrapper mt-3">
-        <div class="breaking-news text-dark rounded shadow d-flex align-items-center px-4"
-            style="height: 50px; overflow: hidden; background-color:#e7ddd2;">
-            <strong class="me-3">Breaking News:</strong>
-            <div class="ticker-container" style="flex: 1; overflow: hidden; position: relative; height: 20px; width: 100%;">
-                <div id="ticker-text" class="ticker-text scroll" style="position: absolute; white-space: nowrap;">
-                    @foreach ($breakingnews as $news)
-                        <span class="ms-2"> {{ $news->news }} </span>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-
     {{-- Post Section --}}
     @php $sectionIndex = 0; @endphp
     @foreach ($categories as $category)
         @php
-            // $categoryBlogs = $blogs->where('category_id', $category->id);
-            $categoryBlogs = $blogs->where('category_id', $category->id)->take(6);
-            $totalBlogsCount = $blogs->where('category_id', $category->id)->count();
+            $categoryBlogs = $blogs->where('category_id', $category->id);
         @endphp
 
 
@@ -160,13 +103,6 @@
                             </div>
                         @endforeach
                     </div>
-
-                    @if ($totalBlogsCount > 6)
-                        <div class="text-center mt-3 d-flex justify-content-end">
-                            <a href="{{ route('allnews') }}" class="btn typebtn">View More</a>
-                        </div>
-                    @endif
-
                 </section>
             </div>
             @php $sectionIndex++; @endphp

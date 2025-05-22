@@ -34,7 +34,7 @@
                         <a class="nav-link" href="{{ route('about') }}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">All News</a>
+                        <a class="nav-link" href="{{ route('allnews') }}">All News</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/contact') }}">Contact</a>
@@ -51,7 +51,7 @@
     @yield('content')
 
     <footer class="py-3 mt-auto" style="background-color:#423a31;">
-        <div class="container py-3">
+        <div class="container-fluid py-3">
             <hr class="bg-light">
             <div class="text-center small" style="color :#e1dad1;">
                 © 2025 by BlogPost. Powered and secured by <span class="text-white">SSE Web Solution</span>

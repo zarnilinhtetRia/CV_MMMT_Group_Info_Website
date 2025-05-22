@@ -9,6 +9,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BreakingNewsController;
 use App\Http\Controllers\LoginController;
 use App\Providers\AppServiceProvider;
 
@@ -40,6 +41,7 @@ Route::post('/comments/store', [BlogPostController::class, 'storeComment'])->nam
 Route::get('/comments/{comment}/edit', [BlogPostController::class, 'editComment'])->name('comments.edit');
 Route::put('/comments/{comment}', [BlogPostController::class, 'updateComment'])->name('comments.update');
 Route::delete('/comments/{comment}', [BlogPostController::class, 'deleteComment'])->name('comments.destroy');
+Route::get('/allnews', [BlogPostController::class, 'allnews'])->name('allnews');
 
 
 //About
@@ -70,6 +72,9 @@ Route::middleware(['auth'])->group(function () {
 
     //Type
     Route::resource('types', TypeController::class);
+
+    // Breaking News
+    Route::resource('breakingnews', BreakingNewsController::class);
 
     //User
     Route::resource('users', UserController::class);

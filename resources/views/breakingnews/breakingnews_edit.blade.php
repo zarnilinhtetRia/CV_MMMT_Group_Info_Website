@@ -18,7 +18,7 @@
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item">Type Edit
+                                    <li class="breadcrumb-item">Breaking News Edit
                                     </li>
                                 </ol>
                             </div>
@@ -47,34 +47,22 @@
                         <div class="col-6 offset-3">
                             <div class="card">
                                 <div class="cade-header mt-2 mb-2">
-                                    <h4 class="cade-title text-center">Type Edit</h4>
+                                    <h4 class="cade-title text-center">Breaking News Edit</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ route('types.update', $type->id) }}" method="POST">
+                                    <form action="{{ route('breakingnews.update', $breakingnews->id) }}" method="POST">
                                         @csrf
                                         @method('put')
                                         <div class="card-body">
                                             <div class="form-group">
-                                                <label for="category_id">Category<span
+                                                <label for="type">Breaking News<span
                                                         class="text-danger">*</span></label>
-                                                <select name="category_id" id="" class="form-control">
-                                                    <option value="" selected>Choose Category</option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}"
-                                                            {{ $type->category_id == $category->id ? 'selected' : '' }}>
-                                                            {{ $category->category }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="type">Type Name<span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="type"
-                                                    placeholder="Enter Type Name" required autofocus name="type"
-                                                    value="{{ $type->type }}">
+                                                <input type="text" class="form-control" id="news"
+                                                    placeholder="Enter News" required autofocus name="news"
+                                                    value="{{ $breakingnews->news }}">
                                             </div>
                                             <div class="modal-footer justify-content-between">
-                                                <a href="{{ route('types.index') }}"><button type="button"
+                                                <a href="{{ route('breakingnews.index') }}"><button type="button"
                                                         class="btn btn-dark">Back</button></a>
                                                 <button type="submit" class="btn btn-primary">Update </button>
                                             </div>
