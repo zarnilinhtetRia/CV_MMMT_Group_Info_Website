@@ -43,6 +43,9 @@ Route::put('/comments/{comment}', [BlogPostController::class, 'updateComment'])-
 Route::delete('/comments/{comment}', [BlogPostController::class, 'deleteComment'])->name('comments.destroy');
 Route::get('/allnews', [BlogPostController::class, 'allnews'])->name('allnews');
 
+// For Category dropdown
+
+
 
 //About
 Route::get('/about', function () {

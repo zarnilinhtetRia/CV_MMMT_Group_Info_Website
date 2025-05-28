@@ -46,9 +46,6 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        // Validate your inputs here before creating
-
-        // Create blog without image first
         $blogs = Blog::create($request->all());
         $blogs->user_id = Auth::id();
 
@@ -57,7 +54,7 @@ class BlogController extends Controller
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->move(public_path('img'), $imageName);  // Save to public/img folder
-            $blogs->image = $imageName;  // Save only the file name
+            $blogs->image = $imageName;
         }
 
         $blogs->save();
@@ -84,8 +81,7 @@ class BlogController extends Controller
 
     public function update(Request $request, Blog $blog)
     {
-        // Update blog fields except image and user_id
-        // Avoid mass updating user_id or image via request (optional but safer)
+
         $blog->fill($request->except(['image', 'user_id']));
 
         // Handle image upload if new image uploaded
@@ -105,9 +101,6 @@ class BlogController extends Controller
 
         return redirect()->route('blogs.index')->with('success', 'Blog updated successfully!');
     }
-
-
-
 
 
     public function destroy(string $id)

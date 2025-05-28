@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-    <div class="container mt-5" style="max-width: 600px;">
+    <div class="container mt-5 pt-5" style="max-width: 600px;">
         <h5 class="text-center">Contact Us</h5>
 
         @if (session('success'))

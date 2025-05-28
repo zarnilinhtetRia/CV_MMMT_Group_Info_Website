@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
     {{-- Blog Post Section --}}
-    <div class="container-fluid mt-5 px-3">
+    <div class="container-fluid mt-5 px-3 pt-5">
         <div class="row">
             {{-- Sidebar --}}
             <div class="col-12 col-md-4 col-lg-3 mb-4">

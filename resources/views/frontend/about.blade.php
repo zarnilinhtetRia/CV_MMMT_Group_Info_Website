@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
     <!-- Main Content -->
-    <div class="container flex-grow-1 py-5">
+    <div class="container flex-grow-1 py-5 mt-5 pt-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h1 class="text-center fw-bold">About Us</h1>

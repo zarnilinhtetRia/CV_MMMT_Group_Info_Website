@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
     {{-- Sub Nav --}}
-    <div class="container-fluid py-2 my-3" style="color :#3a3028;">
+    {{-- <div class="container-fluid py-2 my-3" style="color :#3a3028;">
         <div class="row align-items-center">
 
             <div class="col-12 col-md-3 text-md-left text-center order-md-1">
@@ -49,18 +49,16 @@
                 </form>
             </div>
 
-            {{-- Optional Column --}}
+
             <div class="col-md-3 d-none d-xl-block order-md-3 text-right">
-                <!-- Optional: Add something here like category filter, profile link, etc. -->
+
             </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- Carousel Section --}}
-    <div class="container-fluid my-3">
+    <div class="container-fluid p-0">
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-
-            <!-- Indicators -->
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -68,7 +66,7 @@
                 <li data-target="#myCarousel" data-slide-to="3"></li>
             </ol>
 
-            <!-- Carousel Inner -->
+
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="{{ asset('img/isiam1.jpeg') }}" class="d-block w-100 carousel-img" alt="Slide 4">
@@ -84,7 +82,7 @@
                 </div>
             </div>
 
-            <!-- Controls -->
+
             <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -112,65 +110,118 @@
     </div>
 
     {{-- Post Section --}}
-    @php $sectionIndex = 0; @endphp
-    @foreach ($categories as $category)
-        @php
-            // $categoryBlogs = $blogs->where('category_id', $category->id);
-            $categoryBlogs = $blogs->where('category_id', $category->id)->take(6);
-            $totalBlogsCount = $blogs->where('category_id', $category->id)->count();
-        @endphp
-
-
-        @if ($categoryBlogs->count() > 0)
-            <div class=" mt-5 py-3" style="background-color: {{ $sectionIndex % 2 == 0 ? 'white' : '#f2f2f2' }};">
-                <section class="container">
-                    <h2 class="my-3 font-weight-bold posttitle">{{ $category->category }}</h2>
-
-                    <div class="row">
-                        @foreach ($categoryBlogs as $blog)
-                            <div class="col-12 col-md-6 col-lg-4 d-flex mb-2">
-                                <div class="card h-100 w-100 d-flex flex-column">
-                                    @if ($blog->image)
-                                        <img src="{{ asset('img/' . $blog->image) }}" class="card-img-top" alt="Blog Image"
-                                            style="height: 200px;  width: 100%; object-fit: cover;">
-                                    @else
-                                        <img src="{{ asset('img/no-image.jpg') }}" class="card-img-top" alt="Blog Image"
-                                            style="height: 200px;  width: 100%; object-fit: cover;">
-                                    @endif
-
-                                    <h2 class="mb-0 w-100 overflow-hidden title-height-limit blog-title px-4 mt-2">
-                                        {{ $blog->title }}
-                                    </h2>
-                                    <p class="description px-4">
-                                        <br>
-                                        <span style="font-size: 1.5em; font-weight: bold;" class="ms-3">
-                                            {{ ucfirst(explode(' ', $blog->description)[0]) }}
-                                        </span>
-                                        {{ substr($blog->description, strlen(explode(' ', $blog->description)[0]), 100) }}....
-                                    </p>
-                                    <hr style="border-top: 1px solid #ccc; margin: 10px 0;">
-
-                                    <div class="d-flex justify-content-between p-2">
-                                        <span class="text-muted">
-                                            💬 {{ $blog->comments_count }} comments
-                                        </span>
-                                        <a href="{{ route('blog_post.detail', $blog->id) }}" class="btn morebtn">More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    @if ($totalBlogsCount > 6)
-                        <div class="text-center mt-3 d-flex justify-content-end">
-                            <a href="{{ route('allnews') }}" class="btn typebtn">View More</a>
+    <div class="container-fluid mt-5 px-3">
+        <div class="row">
+            {{-- Sidebar --}}
+            <div class="col-12 col-md-4 col-lg-3 mb-4">
+                <form method="GET" action="{{ route('blog_post.index') }}">
+                    <div class="card shadow-sm border">
+                        <div class="px-3 py-2" style="background-color: #41372f;">
+                            <h4 class="fw-bold mb-0 text-white text-center">Categories</h4>
                         </div>
-                    @endif
-
-                </section>
+                        <div class="card-body p-0" style="background-color: #e7ddd2;">
+                            @foreach ($categories as $category)
+                                <div class="px-3 py-2 border-bottom">
+                                    @if ($category->types->count())
+                                        <div class="dropdown w-100">
+                                            <button class="btn dropdown-toggle w-100 text-left font-weight-bold"
+                                                type="button" id="dropdownMenuButton{{ $category->id }}"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                style="background-color: transparent; border: none;">
+                                                * {{ $category->category }}
+                                            </button>
+                                            <div class="dropdown-menu w-100"
+                                                aria-labelledby="dropdownMenuButton{{ $category->id }}">
+                                                @foreach ($category->types as $type)
+                                                    <button class="dropdown-item" type="submit" name="type"
+                                                        value="{{ $type->id }}">
+                                                        {{ $type->type }}
+                                                    </button>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @else
+                                        <button class="btn w-100 text-left font-weight-bold" type="submit" name="category"
+                                            value="{{ $category->id }}"
+                                            style="background-color: transparent; border: none;">
+                                            * {{ $category->category }}
+                                        </button>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </form>
             </div>
-            @php $sectionIndex++; @endphp
-        @endif
-    @endforeach
+
+            <div class="col-12 col-md-8 col-lg-9">
+                @php $sectionIndex = 0; @endphp
+                @foreach ($categories as $category)
+                    @php
+                        $categoryBlogs = $blogs->where('category_id', $category->id)->take(6);
+                        $totalBlogsCount = $blogs->where('category_id', $category->id)->count();
+                    @endphp
+
+
+                    @if ($categoryBlogs->count() > 0)
+                        <div class="pb-3">
+                            <section class="container">
+                                <h2 class="mb-3 font-weight-bold posttitle">{{ $category->category }}</h2>
+
+                                <div class="row">
+                                    @foreach ($categoryBlogs as $blog)
+                                        <div class="col-12 col-md-6 col-lg-4 d-flex mb-2">
+                                            <div class="card h-100 w-100 d-flex flex-column">
+                                                @if ($blog->image)
+                                                    <img src="{{ asset('img/' . $blog->image) }}" class="card-img-top"
+                                                        alt="Blog Image"
+                                                        style="height: 200px;  width: 100%; object-fit: cover;">
+                                                @else
+                                                    <img src="{{ asset('img/no-image.jpg') }}" class="card-img-top"
+                                                        alt="Blog Image"
+                                                        style="height: 200px;  width: 100%; object-fit: cover;">
+                                                @endif
+
+                                                <h2
+                                                    class="mb-0 w-100 overflow-hidden title-height-limit blog-title px-4 mt-2">
+                                                    {{ $blog->title }}
+                                                </h2>
+                                                <p class="description px-4">
+                                                    <br>
+                                                    <span style="font-size: 1.5em; font-weight: bold;" class="ms-3">
+                                                        {{ ucfirst(explode(' ', $blog->description)[0]) }}
+                                                    </span>
+                                                    {{ substr($blog->description, strlen(explode(' ', $blog->description)[0]), 100) }}....
+                                                </p>
+                                                <hr style="border-top: 1px solid #ccc; margin: 10px 0;">
+
+                                                <div class="d-flex justify-content-between p-2">
+                                                    <span class="text-muted">
+                                                        💬 {{ $blog->comments_count }} comments
+                                                    </span>
+                                                    <a href="{{ route('blog_post.detail', $blog->id) }}"
+                                                        class="btn morebtn">More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                @if ($totalBlogsCount > 6)
+                                    <div class="text-center mt-3 d-flex justify-content-end">
+                                        <a href="{{ route('allnews') }}" class="btn typebtn">View More</a>
+                                    </div>
+                                @endif
+
+                            </section>
+                        </div>
+                        @php $sectionIndex++; @endphp
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+
     {{-- Post Section End --}}
 @endsection

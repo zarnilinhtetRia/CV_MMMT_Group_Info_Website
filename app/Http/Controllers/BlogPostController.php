@@ -25,11 +25,22 @@ class BlogPostController extends Controller
         if ($request->filled('title')) {
             $query->where('title', 'like', '%' . $request->title . '%');
         }
-        if ($request->filled('category')) {
-            $query->where('category_id', $request->category);
-        }
+        // if ($request->filled('category')) {
+        //     $query->where('category_id', $request->category);
+        // }
+        // if ($request->filled('type')) {
+        //     $query->where('type_id', $request->type);
+        // }
+
         if ($request->filled('type')) {
-            $query->where('type_id', $request->type);
+            // Get the type's category id
+            $type = Type::find($request->type);
+            if ($type) {
+                $query->where('category_id', $type->category_id)
+                    ->where('type_id', $type->id);
+            }
+        } elseif ($request->filled('category')) {
+            $query->where('category_id', $request->category);
         }
 
         $blogs = $query->get();
@@ -38,6 +49,8 @@ class BlogPostController extends Controller
 
         return view('frontend.frontend', compact('blogs', 'categories', 'types', 'breakingnews'));
     }
+
+
 
     public function blog_post_detail($id)
     {

@@ -12,9 +12,18 @@ document.addEventListener("DOMContentLoaded", function () {
         options
     );
 
-    document.getElementById(
-        "date-display"
-    ).innerText = `(${englishDate} / ${arabicDate})`;
+    const dateText = `(${englishDate} / ${arabicDate})`;
+
+    const desktopDateEl = document.getElementById("date-display");
+    const mobileDateEl = document.getElementById("date-display-mobile");
+
+    if (desktopDateEl) {
+        desktopDateEl.innerText = dateText;
+    }
+
+    if (mobileDateEl) {
+        mobileDateEl.innerText = dateText;
+    }
 });
 
 //  For Text Scroll

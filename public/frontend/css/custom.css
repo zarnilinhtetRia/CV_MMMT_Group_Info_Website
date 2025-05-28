@@ -30,6 +30,7 @@
 
 .searchbtn {
     background-color: #e7ddd2;
+    color: black;
 }
 
 .posttitle {
@@ -41,6 +42,16 @@
     height: auto;
     max-height: 500px;
     object-fit: cover;
+    margin: 0;
+    padding: 0;
+}
+
+/* Increase height on small screens (mobile) */
+@media (max-width: 767.98px) {
+    .carousel-img {
+        height: 300px;
+        object-fit: cover;
+    }
 }
 
 .description::first-line {

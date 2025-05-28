@@ -78,7 +78,8 @@
                                                 <div class="form-group">
                                                     <label for="category_id">Category<span
                                                             class="text-danger">*</span></label>
-                                                    <select name="category_id" id="" class="form-control">
+                                                    <select name="category_id" id="category_id" class="form-control"
+                                                        required>
                                                         <option value="" selected>Choose Category</option>
                                                         @foreach ($categories as $category)
                                                             <option value="{{ $category->id }}">
@@ -86,7 +87,7 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label for="type_id">Type<span class="text-danger">*</span></label>
                                                     <select name="type_id" id="" class="form-control">
                                                         <option value="" selected>Choose Type</option>
@@ -95,7 +96,23 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                </div> --}}
+
+                                                <!-- Type -->
+                                                <div class="form-group">
+                                                    <label for="type_id">Type<span class="text-danger">*</span></label>
+                                                    <select name="type_id" id="type_id" class="form-control" required>
+                                                        <option value="" selected>Choose Type</option>
+                                                        @foreach ($types as $type)
+                                                            <option value="{{ $type->id }}"
+                                                                data-category="{{ $type->category_id }}">
+                                                                {{ $type->type }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
+
+
                                                 <div class="form-group">
                                                     <label for="image">Image<span
                                                             class="text-danger">*</span></label>
@@ -189,5 +206,35 @@
                     </div>
             </section>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const categorySelect = document.getElementById('category_id');
+                const typeSelect = document.getElementById('type_id');
+
+                function filterTypesByCategory(categoryId) {
+                    const options = typeSelect.querySelectorAll('option');
+                    typeSelect.value = ""; // reset selected value
+
+                    options.forEach(option => {
+                        const optionCategory = option.getAttribute('data-category');
+                        if (!optionCategory || optionCategory === categoryId) {
+                            option.style.display = 'block';
+                        } else {
+                            option.style.display = 'none';
+                        }
+                    });
+                }
+
+                // Initial filter on load (if editing)
+                filterTypesByCategory(categorySelect.value);
+
+                // On category change
+                categorySelect.addEventListener('change', function() {
+                    filterTypesByCategory(this.value);
+                });
+            });
+        </script>
+
 
         @include('layouts.footer')

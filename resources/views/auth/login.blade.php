@@ -44,6 +44,9 @@
                     {{ __('Forgot your password?') }}
                 </a>
             @endif --}}
+            <x-secondary-button onclick="window.history.back();">
+                {{ __('Back') }}
+            </x-secondary-button>
 
             <x-primary-button class="ms-3">
                 {{ __('Log in') }}

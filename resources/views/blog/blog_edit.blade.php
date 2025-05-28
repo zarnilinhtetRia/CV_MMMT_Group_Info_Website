@@ -73,13 +73,25 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="type_id">Type<span class="text-danger">*</span></label>
                                                 <select name="type_id" id="" class="form-control">
                                                     <option value="" selected>Choose Type</option>
                                                     @foreach ($types as $type)
                                                         <option value="{{ $type->id }}"
                                                             {{ $blog->type_id == $type->id ? 'selected' : '' }}>
+                                                            {{ $type->type }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div> --}}
+                                            <div class="form-group">
+                                                <label for="type_id">Type<span class="text-danger">*</span></label>
+                                                <select name="type_id" id="type_id" class="form-control" required>
+                                                    <option value="">Choose Type</option>
+                                                    @foreach ($types as $type)
+                                                        <option value="{{ $type->id }}"
+                                                            data-category="{{ $type->category_id }}">
                                                             {{ $type->type }}
                                                         </option>
                                                     @endforeach
@@ -115,4 +127,54 @@
                 </section>
             </section>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const categorySelect = document.getElementById('category_id');
+                const typeSelect = document.getElementById('type_id');
+                const savedTypeId = "{{ $blog->type_id }}";
+                const savedCategoryId = "{{ $blog->category_id }}";
+
+                function filterTypesByCategory(categoryId) {
+                    // Get all type options
+                    const allOptions = Array.from(typeSelect.querySelectorAll('option[data-category]'));
+                    // Clear type options but keep the placeholder
+                    typeSelect.innerHTML = '<option value="">Choose Type</option>';
+
+                    // Filter types matching the selected category
+                    const filteredOptions = allOptions.filter(option => option.getAttribute('data-category') ===
+                        categoryId);
+
+                    if (filteredOptions.length === 0) {
+                        // Show no types chosen if none found
+                        const noTypeOption = document.createElement('option');
+                        noTypeOption.value = "";
+                        noTypeOption.textContent = "No types chosen";
+                        noTypeOption.disabled = true;
+                        noTypeOption.selected = true;
+                        typeSelect.appendChild(noTypeOption);
+                    } else {
+                        filteredOptions.forEach(option => {
+                            typeSelect.appendChild(option);
+                        });
+                    }
+                }
+
+                // Initial filter on page load using saved category id
+                filterTypesByCategory(savedCategoryId);
+
+                // Select saved type if it exists and is valid
+                if (savedTypeId) {
+                    typeSelect.value = savedTypeId;
+                }
+
+                // On category change, filter types and reset selection
+                categorySelect.addEventListener('change', function() {
+                    filterTypesByCategory(this.value);
+                    typeSelect.value = ""; // reset type selection on category change
+                });
+            });
+        </script>
+
+
         @include('layouts.footer')
