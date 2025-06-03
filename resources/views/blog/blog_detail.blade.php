@@ -52,18 +52,18 @@
                     <p class="description mt-3">
                         <br>
                         <span style="font-size: 1em; font-weight: bold;" class="ms-3">
-                            {{ ucfirst(substr($blog->description, 0, strpos($blog->description, '.'))) . '.' }}
+                            {!! ucfirst(substr($blog->description, 0, strpos($blog->description, '.'))) . '.' !!}
                         </span>
                         <br><br>
                         <span>
-                            {{ substr($blog->description, strpos($blog->description, '.') + 1) }}
+                            {!! substr($blog->description, strpos($blog->description, '.') + 1) !!}
                         </span>
                     </p>
 
-                    <div class="text-start mb-3">
+                    {{-- <div class="text-start mb-3">
                         <span class="btn categorybtn my-2">{{ $blog->category->category }}</span>
                         <span class="btn typebtn my2">{{ $blog->type->type }}</span>
-                    </div>
+                    </div> --}}
 
                     <div class="d-flex justify-content-end mb-3">
                         <a href="{{ url('/blogs') }}" class="btn btn-outline-dark">Back</a>

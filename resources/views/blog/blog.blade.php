@@ -1,4 +1,40 @@
-@include('layouts.header')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Post - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="{{ asset('backend/css/sb-admin-2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js"></script>
+
+</head>
 
 <body id="page-top">
     <div id="wrapper">
@@ -55,7 +91,7 @@
                         <!-- Modal -->
                         <div class="modal fade" id="modal-lg" data-backdrop="static" data-keyboard="false"
                             tabindex="-1" aria-labelledby="modal-lgLabel" aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Create Blog</h5>
@@ -101,7 +137,8 @@
                                                 <!-- Type -->
                                                 <div class="form-group">
                                                     <label for="type_id">Type<span class="text-danger">*</span></label>
-                                                    <select name="type_id" id="type_id" class="form-control" required>
+                                                    <select name="type_id" id="type_id" class="form-control"
+                                                        required>
                                                         <option value="" selected>Choose Type</option>
                                                         @foreach ($types as $type)
                                                             <option value="{{ $type->id }}"
@@ -123,13 +160,25 @@
                                                 <div class="form-group">
                                                     <label for="description">Description<span
                                                             class="text-danger">*</span></label>
-                                                    <textarea class="form-control" id="description" name="description" rows="3" required autofocus></textarea>
+                                                    {{-- <textarea class="form-control" id="description" name="description" rows="3" required autofocus></textarea> --}}
+
+                                                    <textarea class="form-control" id="summernote" name="description" required></textarea>
+
+
+                                                    <script>
+                                                        $('#summernote').summernote({
+                                                            placeholder: '',
+                                                            tabsize: 2,
+                                                            height: 300
+                                                        });
+                                                    </script>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default"
                                                     data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Save</button>
+
                                             </div>
                                         </form>
                                     </div>
@@ -151,7 +200,7 @@
                                             <th>Title</th>
                                             <th>Category</th>
                                             <th>Type</th>
-                                            <th>User</th>
+                                            <th>Image</th>
                                             <th>Date</th>
                                             <th>Action</th>
                                         </tr>
@@ -174,7 +223,9 @@
                                                     @endif
                                                 @endforeach
 
-                                                <td>{{ $blog->user->name }}</td>
+                                                <td><img src="{{ asset('img/' . $blog->image) }}" alt=""
+                                                        width="100" height="100"></td>
+
                                                 <td>{{ $blog->created_at->format('d M Y') }}</td>
                                                 <td>
                                                     <a href="{{ route('blogs.show', $blog->id) }}"
