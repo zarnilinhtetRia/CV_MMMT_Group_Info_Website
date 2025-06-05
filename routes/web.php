@@ -55,6 +55,8 @@ Route::get('/about', function () {
 //Contact Us
 Route::get('/contact', [ContactController::class, 'showForm']);
 Route::post('/contact/submit', [ContactController::class, 'submitForm'])->name('contact.submit');
+Route::get('message', [ContactController::class, 'message']);
+
 
 Route::get('/dashboard', function () {
     return view('index');

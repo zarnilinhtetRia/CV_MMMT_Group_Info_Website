@@ -3,15 +3,15 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
 
-    <h1 class="text-white text-center text-4xl font-bold mb-6" style="color: black">{{ ucfirst($role) }} Login Form</h1>
+    {{-- <h1 class="text-white text-center text-4xl font-bold mb-6" style="color: black">{{ ucfirst($role) }} Login Form</h1> --}}
     <form method="POST" action="{{ route('login') }}">
         @csrf
-        <input type="hidden" name="login_role" value="{{ $role }}">
+        {{-- <input type="hidden" name="login_role" value="{{ $role }}"> --}}
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" style="color: black" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                required autofocus autocomplete="username" style="background-color: white; color:black;" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                autofocus autocomplete="username" style="background-color: white; color:black;" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 

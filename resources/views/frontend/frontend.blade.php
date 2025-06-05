@@ -1,227 +1,106 @@
-@extends('layouts.frontend')
-@section('content')
-    {{-- Sub Nav --}}
-    {{-- <div class="container-fluid py-2 my-3" style="color :#3a3028;">
+@include('frontend.frontend_header')
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+    <div class="container">
         <div class="row align-items-center">
-
-            <div class="col-12 col-md-3 text-md-left text-center order-md-1">
-                <h1 class="mb-2 mb-md-0 font-weight-bold" style="font-size: 60px;">
-                    BlogPost
-                </h1>
-            </div>
-
-            <div
-                class="col-12 col-xl-6  d-flex align-items-center justify-content-center d-none d-xl-flex order-md-2 mt-3 mt-md-0">
-                <form method="GET" action="" class="row g-2 w-100 justify-content-center">
-                    <div class="col-md-3 col-sm-6 position-relative my-3">
-                        <input type="text" name="title" class="form-control" placeholder="Title ရှာရန်"
-                            id="searchInput" value="{{ request('title') }}">
-                        <div id="resultContainer" class="bg-white border rounded shadow-sm"
-                            style="position: absolute; width: 90%; max-height: 150px; overflow-y: auto; display: none; z-index: 1000;">
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <select name="category" class="form-control">
-                            <option value="">Category ရှာရန်</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    {{ request('category') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->category }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <select name="type" class="form-control">
-                            <option value="">Type ရှာရန်</option>
-                            @foreach ($types as $type)
-                                <option value="{{ $type->id }}" {{ request('type') == $type->id ? 'selected' : '' }}>
-                                    {{ $type->type }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="col-md-2 col-sm-6 my-3">
-                        <button type="submit" class="btn searchbtn w-100 text-dark">ရှာရန်</button>
-                    </div>
-                </form>
-            </div>
-
-
-            <div class="col-md-3 d-none d-xl-block order-md-3 text-right">
-
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- Carousel Section --}}
-    <div class="container-fluid p-0">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>
-
-
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('img/isiam1.jpeg') }}" class="d-block w-100 carousel-img" alt="Slide 4">
+            <div class="col-lg-6 hero-text-content">
+                <div class="academic-badge">
+                    <i class="fas fa-university"></i>
+                    University of Washington
                 </div>
-                <div class="carousel-item ">
-                    <img src="{{ asset('img/isiam4.jpg') }}" class="d-block w-100 carousel-img" alt="Slide 1">
+                <h1 class="hero-title">Transform Your Future Through <span>Education</span></h1>
+                <p class="hero-subtitle">Discover a world of knowledge with our expert-led courses and interactive
+                    learning experiences designed to help you achieve your academic goals.</p>
+
+                <div class="academic-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Enrolled Students</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Academic Courses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">Graduation Rate</div>
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('img/isiam2.jpg') }}" class="d-block w-100 carousel-img" alt="Slide 2">
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('img/isiam3.jpg') }}" class="d-block w-100 carousel-img" alt="Slide 3">
+
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn hero-btn hero-btn-primary">View Programs</a>
+                    <a href="#contact" class="btn hero-btn hero-btn-secondary">Apply Now</a>
                 </div>
             </div>
-
-
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="col-lg-6 academic-image">
+                <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3"
+                    alt="University Campus">
+            </div>
         </div>
     </div>
+</section>
 
-    <!-- Breaking News Bar (Below Carousel) -->
-    <div class="breaking-news-wrapper mt-3">
-        <div class="breaking-news text-dark rounded shadow d-flex align-items-center px-4"
-            style="height: 50px; overflow: hidden; background-color:#e7ddd2;">
-            <strong class="me-3">Breaking News:</strong>
-            <div class="ticker-container" style="flex: 1; overflow: hidden; position: relative; height: 20px; width: 100%;">
-                <div id="ticker-text" class="ticker-text scroll" style="position: absolute; white-space: nowrap;">
-                    @foreach ($breakingnews as $news)
-                        <span class="ms-2"> {{ $news->news }} </span>
-                    @endforeach
+
+
+<!-- Courses Section -->
+<section id="courses" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Popular Courses</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" class="card-img-top"
+                        alt="Web Development">
+                    <div class="card-body">
+                        <h5 class="card-title">Web Development</h5>
+                        <p class="card-text">Master modern web development technologies and frameworks.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">$99</span>
+                            <a href="#" class="btn btn-outline-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" class="card-img-top"
+                        alt="Data Science">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Science</h5>
+                        <p class="card-text">Learn data analysis, machine learning, and visualization.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">$129</span>
+                            <a href="#" class="btn btn-outline-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" class="card-img-top"
+                        alt="Digital Marketing">
+                    <div class="card-body">
+                        <h5 class="card-title">Digital Marketing</h5>
+                        <p class="card-text">Master SEO, social media, and content marketing strategies.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-primary fw-bold">$89</span>
+                            <a href="#" class="btn btn-outline-primary">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- Post Section --}}
-    <div class="container-fluid mt-5 px-3">
-        <div class="row">
-            {{-- Sidebar --}}
-            <div class="col-12 col-md-4 col-lg-3 mb-4">
-                <form method="GET" action="{{ route('blog_post.index') }}">
-                    <div class="card shadow-sm border">
-                        <div class="px-3 py-2" style="background-color: #41372f;">
-                            <h4 class="fw-bold mb-0 text-white text-center">Categories</h4>
-                        </div>
-                        <div class="card-body p-0" style="background-color: #e7ddd2;">
-                            @foreach ($categories as $category)
-                                <div class="px-3 py-2 border-bottom">
-                                    @if ($category->types->count())
-                                        <div class="dropdown w-100">
-                                            <button class="btn dropdown-toggle w-100 text-left font-weight-bold"
-                                                type="button" id="dropdownMenuButton{{ $category->id }}"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                style="background-color: transparent; border: none;">
-                                                * {{ $category->category }}
-                                            </button>
-                                            <div class="dropdown-menu w-100"
-                                                aria-labelledby="dropdownMenuButton{{ $category->id }}">
-                                                @foreach ($category->types as $type)
-                                                    <button class="dropdown-item" type="submit" name="type"
-                                                        value="{{ $type->id }}">
-                                                        {{ $type->type }}
-                                                    </button>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @else
-                                        <button class="btn w-100 text-left font-weight-bold" type="submit" name="category"
-                                            value="{{ $category->id }}"
-                                            style="background-color: transparent; border: none;">
-                                            * {{ $category->category }}
-                                        </button>
-                                    @endif
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-12 col-md-8 col-lg-9">
-                @php $sectionIndex = 0; @endphp
-                @foreach ($categories as $category)
-                    @php
-                        $categoryBlogs = $blogs->where('category_id', $category->id)->take(6);
-                        $totalBlogsCount = $blogs->where('category_id', $category->id)->count();
-                    @endphp
+</section>
 
 
-                    @if ($categoryBlogs->count() > 0)
-                        <div class="pb-3">
-                            <section class="container">
-                                <h2 class="mb-3 font-weight-bold posttitle">{{ $category->category }}</h2>
-
-                                <div class="row">
-                                    @foreach ($categoryBlogs as $blog)
-                                        <div class="col-12 col-md-6 col-lg-4 d-flex mb-2">
-                                            <div class="card h-100 w-100 d-flex flex-column">
-                                                @if ($blog->image)
-                                                    <img src="{{ asset('img/' . $blog->image) }}" class="card-img-top"
-                                                        alt="Blog Image"
-                                                        style="height: 200px;  width: 100%; object-fit: cover;">
-                                                @else
-                                                    <img src="{{ asset('img/no-image.jpg') }}" class="card-img-top"
-                                                        alt="Blog Image"
-                                                        style="height: 200px;  width: 100%; object-fit: cover;">
-                                                @endif
-
-                                                <h2
-                                                    class="mb-0 w-100 overflow-hidden title-height-limit blog-title px-4 mt-2">
-                                                    {{ $blog->title }}
-                                                </h2>
-                                                <p class="description px-4">
-                                                    <br>
-                                                    <span style="font-size: 1.5em; font-weight: bold;" class="ms-3">
-                                                        {{ ucfirst(explode(' ', $blog->description)[0]) }}
-                                                    </span>
-                                                    {{ substr($blog->description, strlen(explode(' ', $blog->description)[0]), 100) }}....
-                                                </p>
-                                                <hr style="border-top: 1px solid #ccc; margin: 10px 0;">
-
-                                                <div class="d-flex justify-content-between p-2">
-                                                    <span class="text-muted">
-                                                        💬 {{ $blog->comments_count }} comments
-                                                    </span>
-                                                    <a href="{{ route('blog_post.detail', $blog->id) }}"
-                                                        class="btn morebtn">More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                                @if ($totalBlogsCount > 6)
-                                    <div class="text-center mt-3 d-flex justify-content-end">
-                                        <a href="{{ route('allnews') }}" class="btn typebtn">View More</a>
-                                    </div>
-                                @endif
-
-                            </section>
-                        </div>
-                        @php $sectionIndex++; @endphp
-                    @endif
-                @endforeach
-            </div>
-        </div>
-    </div>
 
 
-    {{-- Post Section End --}}
-@endsection
+
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

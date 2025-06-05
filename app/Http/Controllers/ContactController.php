@@ -15,20 +15,26 @@ class ContactController extends Controller
     public function submitForm(Request $request)
     {
         $request->validate([
-            'name'   => 'required|string|max:255',
-            'email'  => 'required|email|max:255',
-            'phone'  => 'required|string|max:20',
-            'remark' => 'nullable|string',
+            'name'    => 'required|string',
+            'email'   => 'required|email',
+            'phone'   => 'required|string',
+            'subject' => 'required|string',
+            'remark'  => 'nullable|string', // Set to 'required|string' if needed
         ]);
 
-        // Save data
         Contact::create([
-            'name'   => $request->name,
-            'email'  => $request->email,
-            'phone'  => $request->phone,
-            'remark' => $request->remark,
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'subject' => $request->subject,
+            'remark'  => $request->remark,
         ]);
 
         return back()->with('success', 'Your message has been sent successfully.');
+    }
+    public function message()
+    {
+        $message = Contact::all();
+        return view('message.message', compact('message'));
     }
 }

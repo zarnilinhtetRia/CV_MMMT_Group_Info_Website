@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 191);
             $table->string('email', 191);
+            $table->string('subject', 191);
+
             $table->string('phone');
             $table->text('remark')->nullable();
             $table->softDeletes();

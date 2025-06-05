@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif; /* Using a more common web font */
+    line-height: 1.6;
+}
+
+header {
+    background-color: #46287b; /* Purple color from the design */
+    color: white;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 1200px; /* Limit width */
+    margin: 0 auto; /* Center the content */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 2em; /* Adjust overall logo size */
+    font-weight: bold;
+}
+
+.logo W {
+    font-size: 1.5em; /* Adjust size relative to parent */
+    margin-right: 5px;
+    /* Could add specific styling for the 'W' here if it were an SVG or image */
+}
+
+.program-title {
+    font-size: 0.7em; /* Adjust size */
+    line-height: 1.3;
+}
+
+.department-info {
+    font-size: 0.8em;
+    border-left: 1px solid white;
+    padding-left: 15px;
+    margin-left: auto; /* Push to the right */
+    opacity: 0.9; /* Slightly less prominent */
+}
+
+.search-icon {
+    font-size: 1.2em;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+.search-icon:hover {
+    color: #e5d37e; /* Highlight on hover */
+}
+
+nav {
+    background-color: white; /* White background for nav */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    max-width: 1200px; /* Limit width */
+    margin: 0 auto; /* Center the navigation */
+}
+
+nav ul li {
+    padding: 15px 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333; /* Darker text for better contrast */
+    font-weight: normal; /* Adjust font weight */
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+nav ul li a:hover {
+    color: #46287b; /* Purple on hover */
+}
+
+nav ul li:first-child {
+    background-color: #6c4aae; /* Purple background for HOME */
+    color: white;
+}
+
+nav ul li:first-child a {
+    color: white; /* Ensure link color is white */
+}
+
+nav ul li:first-child:hover {
+    background-color: #5a3a9c; /* Slightly darker purple on hover */
+}
+
+.hero {
+    background-image: url('placeholder_background.jpg'); /* Placeholder for the background image */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 20px; /* Increase padding */
+    text-align: center;
+    display: flex; /* Use flexbox to center content vertically */
+    align-items: center;
+    justify-content: center;
+    min-height: 400px; /* Ensure minimum height */
+}
+
+.hero-content {
+    background-color: rgba(70, 40, 123, 0.8); /* Semi-transparent purple overlay */
+    padding: 40px; /* Increase padding */
+    border-radius: 8px; /* Add rounded corners */
+    max-width: 900px; /* Adjust max width */
+    margin: auto; /* Center the block */
+}
+
+.hero-content h1 {
+    margin-top: 0;
+    font-size: 3em; /* Increase font size */
+    margin-bottom: 15px; /* Adjust margin */
+}
+
+.underline {
+    width: 120px; /* Increase width */
+    height: 4px; /* Increase thickness */
+    background-color: #e5d37e; /* Gold color for the underline */
+    margin: 15px auto 25px auto; /* Adjust margins */
+}
+
+.hero-content p {
+    font-size: 1.2em; /* Increase font size */
+    line-height: 1.7; /* Improve line spacing */
+}
+
+footer {
+    /* Basic footer styling */
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    color: #555; /* Darker footer text */
+    font-size: 0.9em;
+} 

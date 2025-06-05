@@ -91,9 +91,9 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('breakingnews') }}">
+            <a class="nav-link" href="{{ url('message') }}">
                 <i class="fas fa-newspaper"></i>
-                <span>Breaking News</span></a>
+                <span>Message</span></a>
         </li>
 
         <li class="nav-item">
