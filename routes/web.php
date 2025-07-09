@@ -43,7 +43,9 @@ Route::put('/comments/{comment}', [BlogPostController::class, 'updateComment'])-
 Route::delete('/comments/{comment}', [BlogPostController::class, 'deleteComment'])->name('comments.destroy');
 Route::get('/allnews', [BlogPostController::class, 'allnews'])->name('allnews');
 
-// For Category dropdown
+//all courses
+Route::get('/all_courses', [BlogController::class, 'all_courses'])->name('all_courses');
+
 
 
 
@@ -88,5 +90,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('blogs', BlogController::class);
 });
 
+//Blog Detail
+// Route::get('/blog_upcoming', [BlogController::class, 'blog_upcoming'])->name('blogs_detail');
 
+// Route::get('/blogs_detail', [BlogController::class, 'blogs_detail'])->name('blogs_detail');
+Route::get('/hero', [BlogController::class, 'hero'])->name('blogs_detail');
+
+Route::get('/about_us', [BlogController::class, 'about_us'])->name('about_us');
 require __DIR__ . '/auth.php';

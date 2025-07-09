@@ -15,60 +15,22 @@ use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller
 {
+
+
     public function blog_post(Request $request)
     {
         $categories = Category::all();
         $types = Type::all();
-
-        $query = Blog::with(['category', 'type'])->withCount('comments');
-
-        if ($request->filled('title')) {
-            $query->where('title', 'like', '%' . $request->title . '%');
-        }
-        // if ($request->filled('category')) {
-        //     $query->where('category_id', $request->category);
-        // }
-        // if ($request->filled('type')) {
-        //     $query->where('type_id', $request->type);
-        // }
-
-        if ($request->filled('type')) {
-            // Get the type's category id
-            $type = Type::find($request->type);
-            if ($type) {
-                $query->where('category_id', $type->category_id)
-                    ->where('type_id', $type->id);
-            }
-        } elseif ($request->filled('category')) {
-            $query->where('category_id', $request->category);
-        }
-
-        $blogs = $query->get();
-
-        $breakingnews = BreakingNews::latest()->take(4)->get();
-
-        return view('frontend.frontend', compact('blogs', 'categories', 'types', 'breakingnews'));
+        $blog = Blog::latest()->get();
+        return view('frontend.frontend', compact('categories', 'types', 'blog'));
     }
-
-
-
     public function blog_post_detail($id)
     {
-        // $blog = Blog::find($id);
-        $blog = Blog::with(['category', 'type', 'comments.user'])->withCount('comments')->findOrFail($id);
-        $categories = Category::with('types')->get();
-        // $types = Type::all();
+        $categories = Category::all();
+        $types = Type::all();
+        $blog_detail = Blog::findOrFail($id);
 
-        $recentPosts = Blog::with(['comments.user']) // ✅ Eager load comments with user
-            ->withCount('comments')                  // ✅ Count comments
-            ->where('category_id', $blog->category_id)
-            ->where('id', '!=', $id)
-            ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-
-
-        return view('frontend.detail', compact('blog', 'recentPosts', 'categories'));
+        return view('frontend.blog_detail', compact('blog_detail', 'categories', 'types'));
     }
 
     public function allnews(Request $request)
@@ -81,6 +43,15 @@ class BlogPostController extends Controller
             $query->where('title', 'like', '%' . $request->title . '%');
         }
         if ($request->filled('category')) {
+            /**
+             * Display the blog post page with all categories and types.
+             *
+             * @param \Illuminate\Http\Request $request
+             * @return \Illuminate\View\View
+             */
+
+            /*************  ✨ Windsurf Command ⭐  *************/
+            /*******  80c62d66-9e14-44bf-a6a4-7ccf8c053cf4  *******/
             $query->where('category_id', $request->category);
         }
         if ($request->filled('type')) {

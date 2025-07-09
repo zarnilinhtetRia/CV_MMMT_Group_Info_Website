@@ -46,9 +46,12 @@
                         {{ $blog->created_at->format('M d, Y') }}
                     </p>
 
-                    <h3 class="card-title fw-bold" style="font-weight: bolder; font-size: 2rem; text-align: left;">
+                    <h3 class="card-title fw-bold" style="font-weight: bolder; font-size: 3rem; text-align: left;">
                         {{ $blog->title }}
                     </h3>
+                    <h2 class="card-title fw-bold" style="font-weight: bolder; font-size: 2rem; text-align: left;">
+                        {{ $blog->sub_title }}
+                    </h2>
                     <p class="description mt-3">
                         <br>
                         <span style="font-size: 1em; font-weight: bold;" class="ms-3">

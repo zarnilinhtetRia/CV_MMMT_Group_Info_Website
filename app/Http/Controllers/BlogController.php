@@ -109,4 +109,30 @@ class BlogController extends Controller
         $blog->delete();
         return redirect()->back()->with('delete', 'Blog Delete Successful');
     }
+
+    public function blogs_detail()
+    {
+
+        return view('frontend.blog_detail');
+    }
+
+    public function blog_upcoming()
+    {
+        return view('frontend.upcoming_courses');
+    }
+
+    public function hero()
+    {
+        return view('frontend.hero');
+    }
+
+    public function all_courses()
+    {
+        $all_courses = Blog::all();
+        return view('frontend.all_courses', compact('all_courses'));
+    }
+    public function about_us()
+    {
+        return view('frontend.about_us');
+    }
 }

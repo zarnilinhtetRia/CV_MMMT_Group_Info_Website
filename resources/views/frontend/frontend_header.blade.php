@@ -516,7 +516,12 @@
                                 <i class="fas fa-home me-1"></i> HOME
                             </a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ route('all_courses') }}">
+                                </i> COURSES
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCourses" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 COURSES
@@ -526,7 +531,7 @@
                                 <li><a class="dropdown-item" href="#">Course 2 Placeholder</a></li>
                                 <li><a class="dropdown-item" href="#">Course 3 Placeholder</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTake" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -557,15 +562,10 @@
                                 <li><a class="dropdown-item" href="#">Project Y Placeholder</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAbout"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                ABOUT US
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ route('about_us') }}">
+                                </i> ABOUT US
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
-                                <li><a class="dropdown-item" href="#">Our Team Placeholder</a></li>
-                                <li><a class="dropdown-item" href="#">Our Mission Placeholder</a></li>
-                            </ul>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="{{ url('/contact') }}">

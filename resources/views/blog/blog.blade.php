@@ -112,6 +112,13 @@
                                                         name="title">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="sub_title">Sub Title</label>
+                                                    <input type="text" class="form-control" id="sub_title"
+                                                        placeholder="Enter Sub Title" required autofocus
+                                                        name="sub_title">
+
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="category_id">Category<span
                                                             class="text-danger">*</span></label>
                                                     <select name="category_id" id="category_id" class="form-control"
@@ -136,7 +143,8 @@
 
                                                 <!-- Type -->
                                                 <div class="form-group">
-                                                    <label for="type_id">Type<span class="text-danger">*</span></label>
+                                                    <label for="type_id">Type<span
+                                                            class="text-danger">*</span></label>
                                                     <select name="type_id" id="type_id" class="form-control"
                                                         required>
                                                         <option value="" selected>Choose Type</option>
