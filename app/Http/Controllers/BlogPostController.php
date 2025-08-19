@@ -22,7 +22,7 @@ class BlogPostController extends Controller
         $categories = Category::all();
         $types = Type::all();
         $blog = Blog::latest()->get();
-        return view('frontend.frontend', compact('categories', 'types', 'blog'));
+        return view('frontend.home', compact('categories', 'types', 'blog'));
     }
     public function blog_post_detail($id)
     {
