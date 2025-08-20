@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Dashboard</title>
+    <title>Product Post - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" type="text/css">
@@ -54,7 +54,7 @@
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item">Blog Edit
+                                    <li class="breadcrumb-item">Product Edit
                                     </li>
                                 </ol>
                             </div>
@@ -83,7 +83,7 @@
                         <div class="col-6 offset-3">
                             <div class="card">
                                 <div class="cade-header mt-2 mb-2">
-                                    <h4 class="cade-title text-center">Blog Edit</h4>
+                                    <h4 class="cade-title text-center">Product Edit</h4>
                                 </div>
                                 <div class="card-body">
                                     <form action="{{ route('blogs.update', $blog->id) }}" method="POST"

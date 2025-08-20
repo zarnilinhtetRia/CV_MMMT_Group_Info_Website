@@ -10,7 +10,7 @@
 
     <!-- Favicons -->
     {{-- <link href="assets/img/favicon.png" rel="icon">   --}}
-    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('img/MMOC1.png') }}" rel="icon">
 
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -74,15 +74,16 @@
         <div class="branding d-flex align-items-center">
 
             <div class="container position-relative d-flex align-items-center justify-content-end">
-                <a href="index.html" class="logo d-flex align-items-center me-auto">
-                    <img src="assets/img/logo.png" alt="">
+                {{-- <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto"> --}}
+                <a href="" class=" d-flex align-items-center me-auto">
+                    <img src="{{ asset('img/MMOC2.png') }}" alt="" style="width: 70px">
                     <!-- Uncomment the line below if you also wish to use a text logo -->
                     <!-- <h1 class="sitename">Medicio</h1>  -->
                 </a>
 
                 <nav id="navmenu" class="navmenu">
                     <ul>
-                        <li><a href="#hero" class="active">Home</a></li>
+                        <li><a href="{{ url('/') }}" class="active">Home</a></li>
                         <li><a href="#about">Group</a></li>
                         <li><a href="#services">Our Award</a></li>
 
@@ -111,7 +112,7 @@
 
                         <li><a href="#doctors">News</a></li>
 
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="{{ url('contact') }}">Contact</a></li>
                     </ul>
                     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
                 </nav>
@@ -134,35 +135,35 @@
 
                 <div class="carousel-item active">
                     <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="">
-                    <div class="container">
+                    {{-- <div class="container">
                         <h2>Welcome to Medicio</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                             laboris nisi ut aliquip ex ea commodo consequat.</p>
                         <a href="#about" class="btn-get-started">Read More</a>
-                    </div>
+                    </div> --}}
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
                     <img src="assets/img/hero-carousel/hero-carousel-2.jpg" alt="">
-                    <div class="container">
+                    {{-- <div class="container">
                         <h2>At vero eos et accusamus</h2>
                         <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id
                             quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.
                             Temporibus autem quibusdam et aut officiis debitis aut.</p>
                         <a href="#about" class="btn-get-started">Read More</a>
-                    </div>
+                    </div> --}}
                 </div><!-- End Carousel Item -->
 
                 <div class="carousel-item">
                     <img src="assets/img/hero-carousel/hero-carousel-3.jpg" alt="">
-                    <div class="container">
+                    {{-- <div class="container">
                         <h2>Temporibus autem quibusdam</h2>
                         <p>Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
                             aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
                             nesciunt omnis iste natus error sit voluptatem accusantium.</p>
                         <a href="#about" class="btn-get-started">Read More</a>
-                    </div>
+                    </div> --}}
                 </div><!-- End Carousel Item -->
 
                 <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
@@ -179,69 +180,6 @@
 
         </section><!-- /Hero Section -->
 
-        <!-- Featured Services Section -->
-        <section id="featured-services" class="featured-services section">
-
-            <div class="container">
-
-                <div class="row gy-4">
-
-                    <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item position-relative">
-                            <div class="icon"><i class="fas fa-heartbeat icon"></i></div>
-                            <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                    <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-                        <div class="service-item position-relative">
-                            <div class="icon"><i class="fas fa-pills icon"></i></div>
-                            <h4><a href="" class="stretched-link">Sed ut perspici</a></h4>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                    <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-                        <div class="service-item position-relative">
-                            <div class="icon"><i class="fas fa-thermometer icon"></i></div>
-                            <h4><a href="" class="stretched-link">Magni Dolores</a></h4>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                    <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
-                        <div class="service-item position-relative">
-                            <div class="icon"><i class="fas fa-dna icon"></i></div>
-                            <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                        </div>
-                    </div><!-- End Service Item -->
-
-                </div>
-
-            </div>
-
-        </section><!-- /Featured Services Section -->
-
-        <!-- Call To Action Section -->
-        <section id="call-to-action" class="call-to-action section accent-background">
-
-            <div class="container">
-                <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="col-xl-10">
-                        <div class="text-center">
-                            <h3>In an emergency? Need help now?</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                officia deserunt mollit anim id est laborum.</p>
-                            <a class="cta-btn" href="#appointment">Make an Appointment</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section><!-- /Call To Action Section -->
 
         <!-- About Section -->
         <section id="about" class="about section">
@@ -1117,7 +1055,7 @@
     </section><!-- /Faq Section -->
 
     <!-- Contact Section -->
-@include('frontend.contact')
+
 
   </main>
 

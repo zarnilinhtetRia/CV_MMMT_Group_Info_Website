@@ -11,6 +11,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BreakingNewsController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ServiceController;
 use App\Providers\AppServiceProvider;
 
 // Route::get('/login', function () {
@@ -47,8 +49,21 @@ Route::get('/allnews', [BlogPostController::class, 'allnews'])->name('allnews');
 Route::get('/all_courses', [BlogController::class, 'all_courses'])->name('all_courses');
 
 
+//Service
+Route::get('/service', [ServiceController::class, 'service']);
+Route::post('/servicestore', [ServiceController::class, 'servicestore'])->name('contact.submit');
+Route::get('service_edit/{id}', [ServiceController::class, 'service_edit']);
+Route::post('service_update/{id}', [ServiceController::class, 'service_update']);
 
+Route::get('/service_delete/{id}', [ServiceController::class, 'service_delete'])->name('service.delete');
 
+//News
+Route::get('/news', [NewsController::class, 'news']);
+Route::post('/newsstore', [NewsController::class, 'newsstore'])->name('contact.submit');
+Route::get('new_edit/{id}', [NewsController::class, 'new_edit']);
+Route::post('new_update/{id}', [NewsController::class, 'new_update']);
+
+Route::get('/new_delete/{id}', [NewsController::class, 'new_delete']);
 //About
 Route::get('/about', function () {
     return view('frontend.about');

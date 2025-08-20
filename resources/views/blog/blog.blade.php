@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Dashboard</title>
+    <title>Product - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" type="text/css">
@@ -54,14 +54,14 @@
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-primary " data-toggle="modal"
                                         data-target="#modal-lg">
-                                        Create Blog
+                                        Create Product
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item">Blog
+                                    <li class="breadcrumb-item">Product
                                     </li>
                                 </ol>
                             </div>
@@ -94,7 +94,7 @@
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Create Blog</h5>
+                                        <h5 class="modal-title">Create Product</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -198,7 +198,7 @@
                     <div class="mt-3 col-md-12">
                         <div class="card ">
                             <div class="card-header">
-                                <h3 class="card-title">Blog Table</h3>
+                                <h3 class="card-title">Product Table</h3>
                             </div>
                             <div class="card-body">
                                 <table id="example1" class="table table-bordered table-striped">

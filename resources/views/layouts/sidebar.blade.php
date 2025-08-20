@@ -6,7 +6,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Blog Post Admin</div>
+        <div class="sidebar-brand-text mx-3">MMMT</div>
     </a>
 
     <!-- Divider -->
@@ -87,9 +87,22 @@
         <li class="nav-item">
             <a class="nav-link" href="{{ url('blogs') }}">
                 <i class="fas fa-file-alt"></i>
-                <span>Blog</span></a>
+                <span>Products</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('service') }}">
+                <i class="fas fa-file-alt"></i>
 
+
+                <span>Services</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('news') }}">
+                <i class="fas fa-newspaper"></i>
+
+
+                <span>News</span></a>
+        </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('message') }}">
                 <i class="fas fa-newspaper"></i>
