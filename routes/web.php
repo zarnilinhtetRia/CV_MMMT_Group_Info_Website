@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AwardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BreakingNewsController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ServiceController;
@@ -57,8 +59,17 @@ Route::post('service_update/{id}', [ServiceController::class, 'service_update'])
 
 Route::get('/service_delete/{id}', [ServiceController::class, 'service_delete'])->name('service.delete');
 
+
+//Award_admin
+
+Route::get('/awards', [AwardController::class, 'awards']);
+Route::post('/awardstore', [AwardController::class, 'awardstore'])->name('contact.submit');
+Route::get('award_edit/{id}', [AwardController::class, 'award_edit']);
+Route::post('award_update/{id}', [AwardController::class, 'award_update']);
+
+Route::get('/award_delete/{id}', [AwardController::class, 'award_delete'])->name('award.delete');
 //News
-Route::get('/news', [NewsController::class, 'news']);
+Route::get('/news_admin', [NewsController::class, 'news']);
 Route::post('/newsstore', [NewsController::class, 'newsstore'])->name('contact.submit');
 Route::get('new_edit/{id}', [NewsController::class, 'new_edit']);
 Route::post('new_update/{id}', [NewsController::class, 'new_update']);
@@ -73,7 +84,11 @@ Route::get('/about', function () {
 Route::get('/contact', [ContactController::class, 'showForm']);
 Route::post('/contact/submit', [ContactController::class, 'submitForm'])->name('contact.submit');
 Route::get('message', [ContactController::class, 'message']);
-
+//Our Awards
+Route::get('/our_awards', [FrontendController::class, 'our_awards']);
+//News
+Route::get('/news', [FrontendController::class, 'news']);
+Route::get('/news_search', [FrontendController::class, 'index'])->name('news_search');
 
 Route::get('/dashboard', function () {
     return view('index');

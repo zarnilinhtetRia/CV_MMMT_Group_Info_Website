@@ -97,11 +97,16 @@
                 <span>Services</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ url('news') }}">
+            <a class="nav-link" href="{{ url('news_admin') }}">
                 <i class="fas fa-newspaper"></i>
 
 
                 <span>News</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('awards') }}">
+                <i class="fas fa-trophy"></i>
+                <span>Our Awards</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ url('message') }}">

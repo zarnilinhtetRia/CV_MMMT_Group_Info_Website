@@ -579,7 +579,7 @@
                     <ul>
                         <li><a href="{{ url('/') }}" class="active">Home</a></li>
                         <li><a href="#about">Group</a></li>
-                        <li><a href="#services">Our Award</a></li>
+                        <li><a href="{{ url('our_awards') }}">Our Awards</a></li>
 
                         <li class="dropdown"><a href="#"><span>Products</span> <i
                                     class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -604,7 +604,8 @@
                         <li><a href="#doctors">Markets</a></li>
                         <li><a href="#doctors">History</a></li>
 
-                        <li><a href="#doctors">News</a></li>
+                        <li><a href="{{ url('news') }}">News</a></li>
+
 
                         <li><a href="{{ url('contact') }}">Contact</a></li>
                     </ul>
